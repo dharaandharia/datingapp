@@ -52,4 +52,9 @@
         let csrf_token = '{{csrf_token()}}';
     </script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script>
+        Echo.channel('home').listen('NewMessage',(e)=>{
+            console.log(e);
+        })
+    </script>
 @endsection
