@@ -1,0 +1,443 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&display=swap");
+
+body {
+    /* background-color: #ddd; */
+    color: #fff;
+    /* font-family: Open Sans, sans-serif; */
+    /* font-family: "Crimson Text", serif; */
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.navbar {
+    border-bottom: rgba(0, 142, 214, 0.6) 1.5px solid;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    transition: top 0.5s ease;
+}
+
+.navbar-hide {
+    top: -60px;
+}
+
+a.active {
+    color: #008ed6 !important;
+    font-weight: 600;
+}
+
+#main-nav li a {
+    font-size: 0.95rem;
+}
+
+.nav-logout {
+    background-color: transparent;
+    border: none;
+    color: #aaa;
+    font-size: 1rem;
+}
+
+.nav-logout:hover {
+    color: #d60023;
+}
+
+option {
+    color: black;
+}
+
+#home-section {
+    background: url(../images/table.jpg);
+    background-repeat: no-repeat;
+    background-position: 0% 0%;
+    background-size: cover;
+    background-attachment: scroll;
+    min-height: 100vh;
+}
+
+#home-section .dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.home-inner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+/* .home-inner > div {
+    overflow: hidden;
+} */
+
+#home-section .card {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1.8px solid rgba(0, 142, 214, 0.3);
+}
+
+#home-section img {
+    width: 28%;
+}
+
+.input-field {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    border-bottom: solid 2px rgba(0, 142, 214, 0.6);
+    color: white;
+    padding-bottom: 6px;
+    padding-left: 10px;
+    width: 85%;
+}
+
+.input-field:focus {
+    outline: none;
+}
+
+::-ms-reveal {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 7px;
+    filter: invert(0.8);
+    opacity: 0.6;
+}
+
+::-ms-reveal:hover {
+    opacity: 1;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 2px;
+    opacity: 0.6;
+    filter: invert(0.8);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.input-icon {
+    border-bottom: solid 2px rgba(0, 142, 214, 0.6);
+    line-height: initial;
+    padding-top: 3px;
+}
+
+.erroMsg {
+    padding-left: 5%;
+    color: #d60023;
+    width: 100%;
+    max-height: 18px;
+    transition: all 10s auto;
+}
+
+.ease .erroMsg {
+    max-height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+}
+
+input[type="file"] {
+    overflow: hidden;
+    height: 0px;
+}
+
+.custom-file-upload {
+    margin-bottom: 0.3rem;
+}
+
+.file-upload-wrapper {
+    border-bottom: solid 2px rgba(0, 142, 214, 0.6);
+}
+
+#home-section .forgot-pass {
+    color: white;
+    padding-left: 5%;
+    width: 100%;
+    text-align: left;
+}
+
+.text-theme {
+    color: rgba(0, 142, 214, 0.8);
+}
+
+.btn-theme {
+    border: 1px rgba(0, 142, 214, 0.6) solid;
+    background-color: rgba(0, 142, 214, 0.6);
+    color: white;
+    border-radius: 3px;
+}
+
+.btn-theme:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.btn-facebook {
+    border-radius: 3px;
+    background-color: #4267b2;
+    border-color: #4267b2;
+    color: white;
+}
+
+.btn-facebook:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.btn-facebook:focus {
+    box-shadow: 0 0 0 0.2rem rgb(20 20 168 / 25%);
+}
+
+.btn-instagram {
+    border-radius: 3px;
+    border: 0px;
+    background: linear-gradient(
+        45deg,
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+    );
+    color: white;
+}
+
+.btn-instagram:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.btn-instagram:focus {
+    box-shadow: 0 0 0 0.2rem rgb(244 111 48 / 25%);
+}
+
+#aft-header {
+    background-color: #d60023;
+    color: white;
+    border-top: 3px solid rgba(0, 142, 214, 0.8);
+    /* border-bottom: 4px solid rgba(0, 142, 214, 0.8); */
+}
+
+#aft-header .row > div {
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+}
+
+#aft-header p {
+    margin: 0;
+}
+
+#aft-header h5 {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+.about-head {
+    background-color: #f0edf1;
+    color: black;
+    border-bottom: 2px solid rgba(0, 142, 214, 0.8);
+}
+
+.about-headt h1 {
+    font-size: 2.6rem;
+}
+
+.about-head i {
+    color: #d60023;
+}
+
+.about-body {
+    color: black;
+}
+
+.about-body h1 {
+    font-size: 2.6rem;
+}
+
+.about-img {
+    background: url(../images/60636ddb390000253beb288c.jpeg);
+    background-repeat: no-repeat;
+    background-position: 72% 80%;
+    background-size: cover;
+    background-attachment: scroll;
+    min-height: 300px;
+    border-top: 2px solid rgba(0, 142, 214, 0.8);
+    border-bottom: 2px solid rgba(0, 142, 214, 0.8);
+}
+
+.about-img .dark-overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#howItWorks-section {
+    color: black;
+}
+
+.howItworks-head {
+    background-color: #f0edf1;
+}
+
+.howItworks-head h1 {
+    font-size: 2.6rem;
+}
+
+.howItworks-head i {
+    color: #d60023;
+}
+
+.howItworks-head h4 {
+    color: rgb(0, 142, 214);
+}
+
+.carousel-review {
+    border-top: 2px solid rgba(0, 142, 214, 0.8);
+    border-bottom: 3px solid rgba(0, 142, 214, 0.8);
+}
+
+.carousel-review {
+    height: 300px;
+    background-image: url(../images/GrandNileTower-Revolving-Restaurant-Romantic-Dinner-scaled.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 56%;
+    background-size: cover;
+    background-attachment: scroll;
+}
+
+.carousel-review .dark-overlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#slider,
+.carousel-inner {
+    height: 400px;
+}
+
+.carousel-review i {
+    opacity: 0.7;
+}
+
+.review-img > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.carousel-caption {
+    top: 0px;
+}
+
+.safe {
+    color: black;
+}
+
+.safe h1,
+.safe h3 {
+    display: inline-block;
+}
+
+.safe h1 {
+    color: #d60023;
+}
+
+footer {
+    background-color: #d8d5d8;
+    color: black;
+    border-radius: 5px 5px 0 0;
+    border-top: 2px solid #d60023;
+}
+
+footer i {
+    color: #d60023;
+}
+footer i:hover {
+    opacity: 0.8;
+}
+
+footer img {
+    height: 20px;
+}
+
+footer span {
+    font-size: 1.2rem;
+}
+
+#fileName {
+    overflow: hidden;
+    height: 28px;
+}
+
+/* ***************************************************** */
+/* ***************     media queries    **************** */
+/* ***************************************************** */
+@media (min-width: 576px) {
+    .carousel-caption {
+        top: 10px;
+    }
+}
+@media (min-width: 845px) {
+    .about-body .row div:first-child {
+        border-right: 1px solid #bbb;
+    }
+}
+
+@media (min-width: 880px) {
+    #home-section {
+        background: url(../images/dinnertable.jpg);
+        background-repeat: no-repeat;
+        background-position: 45% 0%;
+        background-size: cover;
+        background-attachment: scroll;
+        min-height: 100vh;
+    }
+
+    #home-section .dark-overlay {
+        min-height: 100vh;
+    }
+
+    #aft-header h5 {
+        background-color: transparent;
+        font-size: 1.125rem;
+        margin-bottom: 5px;
+    }
+
+    #aft-header .row > div:first-child {
+        background-color: #8a0016;
+    }
+
+    #aft-header .row > div:nth-child(2) {
+        background-color: #a3001b;
+    }
+
+    #aft-header .row > div:nth-child(3) {
+        background-color: #bd001f;
+    }
+
+    .about-img {
+        background-attachment: fixed;
+    }
+
+    .carousel-caption {
+        top: 40px;
+    }
+}

@@ -1,0 +1,162 @@
+section {
+    height: calc(99vh - 65.5px);
+}
+
+.app {
+    /* background-color: rgba(214, 0, 35, 0.9); */
+    border-radius: 37px;
+}
+
+.app .img {
+    box-shadow: 0px 0px 5px 1px rgba(0, 142, 214, 1);
+    height: 40rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* background-size: cover; */
+    border-radius: 30px;
+    position: relative;
+    /* overflow: hidden; */
+}
+
+.app .noMatch {
+    /* border: 1px solid rgb(214, 0, 35); */
+    height: 40rem;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px rgba(0, 142, 214, 1);
+    background-color: white;
+    color: rgba(0, 142, 214, 1);
+}
+
+.app .info {
+    color: #ccc;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 30px 30px;
+    padding-bottom: 40px;
+    padding-top: 10px;
+}
+
+.btn-wrapper {
+    position: absolute;
+    bottom: -25px;
+}
+
+.like {
+    color: white;
+
+    background-color: rgb(214, 0, 35);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.like i {
+    transition: all 0.2s ease-in-out;
+}
+
+.like:hover {
+    /* border: 1px solid rgb(214, 0, 35); */
+    background-color: rgb(252, 217, 223);
+    transition: all 0.2s ease-in-out;
+}
+
+.like:hover i {
+    color: rgb(214, 0, 35);
+    transition: all 0.2s ease-in-out;
+}
+
+.dislike {
+    color: white;
+    background-color: rgba(0, 142, 214, 1);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.dislike i {
+    padding-top: 3px;
+    transform: scale(1.3, 1.3);
+    transition: all 0.2s ease-in-out;
+}
+
+.dislike:hover {
+    /* border: 1px solid rgba(0, 142, 214, 1); */
+    background-color: rgb(230, 244, 252);
+    transition: all 0.2s ease-in-out;
+}
+.dislike:hover i {
+    color: rgba(0, 142, 214, 1);
+    transition: all 0.2s ease-in-out;
+}
+
+.spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+    border-radius: 29px;
+    display: none !important;
+}
+
+.disable-dislike {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.5) 50%
+    );
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.disable-like {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 50px;
+    width: 50px;
+    background: linear-gradient(
+        to bottom,
+        transparent 50%,
+        rgba(0, 0, 0, 0.5) 50%
+    );
+    z-index: 2;
+    border-radius: 50%;
+}
+
+#spinLogo {
+    height: 50px;
+    width: 50px;
+    opacity: 0.9;
+    animation: flip-scale-down-diag-2 2s infinite linear;
+}
+
+@keyframes flip-scale-down-diag-2 {
+    0% {
+        transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+    }
+    50% {
+        transform: scale(0.4) rotate3d(-1, 1, 0, -0deg);
+    }
+    100% {
+        transform: scale(1) rotate3d(-1, 1, 0, 0deg);
+    }
+}
+
+.spinner.show {
+    display: flex !important;
+}
