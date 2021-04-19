@@ -130,7 +130,7 @@
                         <div class="chat-form m-0">
                             <form class="row m-0 p-2" id="sendMsg">
                                 <div class="col-9 p-0">
-                                    <textarea name="message" id="" class="col"></textarea>
+                                    <textarea name="message" class="col"></textarea>
                                 </div>
                                 <input type="number" name="chat_id" value="{{ $chat->chat_id }}" hidden>
                                 @csrf
@@ -155,9 +155,4 @@
         let csrf_token = '{{csrf_token()}}';
     </script>
     <script src="{{ asset('js/dashboard.js') }}"></script>
-    <script>
-        // Echo.channel('home').listen('NewMessage',(e)=>{
-        //     console.log(e);
-        // })
-    </script>
 @endsection

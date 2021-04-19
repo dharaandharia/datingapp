@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Message;
 use App\Models\Chat;
+use App\Events\NewMessage;
 
 class MessageController extends Controller
 {
@@ -36,6 +37,8 @@ class MessageController extends Controller
             $chat->number_of_messages = 1;
             $chat->save();
         }
+
+        broadcast(new NewMessage($msg))->toOthers();
         
     }
 

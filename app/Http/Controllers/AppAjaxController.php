@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Chat;
 use App\Models\Matching;
+use App\Events\NewMatch;
 
 class AppAjaxController extends Controller
 {
@@ -22,17 +23,20 @@ class AppAjaxController extends Controller
         }else{
             $chat = Chat::create([]);
 
-            Matching::create([
+            $first = Matching::create([
                 'chat_id' => $chat->id,
                 'user_id' => Auth::user()->id,
                 'match_with' => $request->user_id,
             ]);
 
-            Matching::create([
+            $second = Matching::create([
                 'chat_id' => $chat->id,
                 'user_id' => $request->user_id,
                 'match_with' => Auth::user()->id,
             ]);
+
+            event(new NewMatch($first));
+            event(new NewMatch($second));
         }
 
     }

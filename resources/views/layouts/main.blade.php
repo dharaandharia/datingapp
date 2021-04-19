@@ -35,7 +35,7 @@
                             <form action="{{ url('/logout') }}" method="POST" class="px-3 pt-5">
                                 @csrf
                                 <div style="height:50px"></div>
-                                <button type="submit" class="nav-logout btn btn-outline-danger btn-block">Logout</button>
+                                <button type="submit" class="nav-logout btn btn-outline-light btn-block">Logout</button>
                             </form>
                         </div>
 

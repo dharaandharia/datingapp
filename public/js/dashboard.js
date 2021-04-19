@@ -86,9 +86,79 @@ $(document).ready(()=>{
       return age;
    }
 
-   // CHAT BANNER EVERNT LISTENER
-
+   // CHAT BANNER EVENT LISTENER AND RECIVING NEW MESSAGE
    chats.map((chat)=>{
+
+      // *****************************************************************
+      // ******************* recieve new message *************************
+      // *****************************************************************
+
+      Echo.private('chat.'+chat.chat_id).listen('NewMessage',(e)=>{
+         // adding the message to the chat
+         let message = document.createElement('div');
+         message.className='row m-0 single-message py-1';
+
+         let contentWrapper  = document.createElement('div');
+         contentWrapper.className = 'col p-0 limit';
+         
+         let content = document.createElement('div');
+         content.className = 'px-3 message-content p-0';
+         content.innerText= e.content;
+         
+         let img = document.createElement('div');
+         img.className= 'message-pic align-self-end';
+         img.style.background = 'url(/storage/profile_pictures/'+e.profile_picture+') center / cover no-repeat';
+
+         contentWrapper.appendChild(content);
+         message.appendChild(img);
+         message.appendChild(contentWrapper);
+         
+         document.querySelector('#chat_'+e.chat_id+' .chat-messages').insertAdjacentElement('afterbegin',message);
+
+         
+         // customizing the chat banner
+         
+         let banner = document.querySelector('#chatBanner_'+e.chat_id);
+            // banner message number
+         if(!banner.classList.contains('active')){
+               // if not active
+            let seen = document.querySelector('#chatBanner_'+e.chat_id+' .chat-info > span');
+            seen.classList.remove('d-none');
+            if(seen.innerText.length == 0){
+               seen.innerText = 1;
+            }else{
+               seen.innerText ++;
+            }
+         }else{
+               // if active
+            $.ajax({
+               type:'POST',
+               url:'/seen',
+               data:{_token : csrf_token,chat_id: e.chat_id},
+               success:function(data){
+               }
+            });
+         }
+            // banner message
+         let bannerMessage;
+         if(e.content.length >27){
+           bannerMessage = e.content.substring(0,26)+'...';
+         }else{
+            bannerMessage = e.content;
+         }
+         let messageWrapper = document.querySelector('#chatBanner_'+e.chat_id+' .chat-info p');
+         messageWrapper.innerHTML= `<p>${bannerMessage}</p>`;
+
+            // moving the banner to the begining
+
+         $('#chatBanner_'+e.chat_id).remove();
+         document.querySelector('.contacts').insertAdjacentElement("afterbegin",banner);
+
+      })
+
+
+
+      // event listener
       document.querySelector('#chatBanner_'+chat.chat_id).addEventListener('click',()=>{
          if(!(document.querySelector('.contact-chat.active') == null)){
             document.querySelector('.contact-chat.active').classList.replace('active','d-none');
@@ -107,6 +177,7 @@ $(document).ready(()=>{
          let seen = document.querySelector('#chatBanner_'+chat.chat_id+' .chat-info > span');
 
          if(!seen.classList.contains('d-none')){
+            seen.innerText= '';
             seen.classList.add('d-none');
 
             // AJAX SEEN
@@ -144,6 +215,7 @@ $(document).ready(()=>{
          submitForm(e,form);
       });
 
+       // textarea on ENTER key event
       form.elements[0].addEventListener('keypress',(e)=>{
          if(e.key === "Enter"){
             submitForm(e,form);
@@ -152,12 +224,15 @@ $(document).ready(()=>{
    })
 
 
+   // SUBMITTING SEND MESSAGE FORM
+
    function submitForm(e,form){
       e.preventDefault();
-      if(!form.elements[0].value == 0){
-         let chat_id = form.elements[1].value;
-         let msg = form.elements[0].value;
-         form.elements[0].value = '';
+      let chat_id = form.elements[1].value;
+      let msg = form.elements[0].value;
+      form.elements[0].value = '';
+      if(!msg.trim().length == 0){
+
          // AJAX SENDING MESSAGE
          $.ajax({
             type:'POST',
@@ -169,7 +244,8 @@ $(document).ready(()=>{
 
          // -- MODIFING UI --
          
-         // chat message
+         // chat message update
+
          let message = document.createElement('div');
          message.className='row m-0 single-message mine py-1';
 
@@ -191,8 +267,7 @@ $(document).ready(()=>{
          
          document.querySelector('#chat_'+chat_id+' .chat-messages').insertAdjacentElement('afterbegin',message);
 
-         // chat banner
-
+         // chat banner message
 
          let span = document.createElement('span');
          span.innerText= 'You: ';
@@ -213,6 +288,253 @@ $(document).ready(()=>{
          let oldP = document.querySelector('#chatBanner_'+chat_id+' p');
          OldPParent = document.querySelector('#chatBanner_'+chat_id+' .chat-info');
          OldPParent.replaceChild(p,oldP);
+
+         // chat banner order
+
+         let banner = document.querySelector('#chatBanner_'+chat_id);
+         $('#chatBanner_'+chat_id).remove();
+         document.querySelector('.contacts').insertAdjacentElement("afterbegin",banner);
+
       }
    }
+
+   Echo.private('match.'+user.id).listen('NewMatch',(e)=>{
+
+      // adding new match to contact list
+      let contact = document.createElement('div');
+      contact.className='contact d-flex align-items-center px-3';
+      contact.id = 'chatBanner_'+e.chat_id;
+
+      let img = document.createElement('div');
+      img.className = 'chat-img';
+      img.style.background = 'url(/storage/profile_pictures/'+e.profile_picture+') center / cover no-repeat';
+
+      let chatInfo = document.createElement('div');
+      chatInfo.className = 'chat-info pl-3';
+
+      let name = document.createElement('b');
+      name.innerText = e.first_name+' '+e.last_name;
+
+      let content = document.createElement('p');
+      content.innerText = e.last_message;
+
+      let msgNum = document.createElement('span');
+      msgNum.className = "msg-num text-center";
+
+
+
+      chatInfo.appendChild(name);
+      chatInfo.appendChild(content);
+      chatInfo.appendChild(msgNum);
+
+      contact.appendChild(img);
+      contact.appendChild(chatInfo);
+
+      document.querySelector('.contacts').insertAdjacentElement("afterbegin",contact);
+
+      // creating its own chat
+
+      let contactChat = document.createElement('div');
+      contactChat.className = 'contact-chat d-none';
+      contactChat.id = 'chat_'+e.chat_id;
+
+      let contactChatTop = document.createElement('div');
+      contactChatTop.className = 'contact-chat-top m-0 p-3 row';
+
+         let contactChatImg = document.createElement('div');
+         contactChatImg.className = 'contact-chat-img ml-2';
+         contactChatImg.style.background = 'url(/storage/profile_pictures/'+e.profile_picture+') center / cover no-repeat';
+
+         let nameWrapper = document.createElement('div');
+         nameWrapper.className = 'd-flex align-items-center';
+
+            let nameTitle = document.createElement('span');
+            nameTitle.className = 'ml-4';
+            nameTitle.innerText = e.first_name+' '+e.last_name;
+
+            nameWrapper.appendChild(nameTitle);
+         
+         let close = document.createElement('div');
+         close.className = 'col d-flex align-items-center flex-row-reverse';
+
+            let closeButton = document.createElement('i');
+            closeButton.classList = 'fas fa-times p-1';
+            closeButton.id = 'chatClose';
+            closeButton.addEventListener('click',()=>{
+               document.querySelector('.contact-chat.active').classList.replace('active','d-none');
+               document.querySelector('.contact.active').classList.remove('active');
+               if(current === undefined){
+                  document.querySelector('.noMatch').classList.replace('d-none','d-flex');
+               }else{
+                  document.querySelector('#app').classList.replace('d-none','d-flex');
+               }
+            });
+
+            close.appendChild(closeButton);
+         
+         contactChatTop.appendChild(contactChatImg);
+         contactChatTop.appendChild(nameWrapper);
+         contactChatTop.appendChild(close);
+      
+      let chatWrapper = document.createElement('div');
+      chatWrapper.className = 'chat-messages-wrapper p-3';
+
+         let chat = document.createElement('div');
+         chat.className = 'chat-messages d-flex flex-column-reverse p-1';
+         
+         chatWrapper.appendChild(chat);
+
+      let chatForm = document.createElement('div');
+      chatForm.className = 'chat-form m-0';
+
+            let form = document.createElement('form');
+            form.className = 'row m-0 p-2';
+            form.id = 'sendMsg';
+
+               let textareaWrapper = document.createElement('div');
+               textareaWrapper.className = 'col-9 p-0';
+
+                  let formTextarea = document.createElement('textarea');
+                  formTextarea.name = 'message';
+                  formTextarea.className = 'col';
+
+                  textareaWrapper.appendChild(formTextarea);
+
+               let chatIDinput = document.createElement('input');
+               chatIDinput.name = 'chat_id';
+               chatIDinput.type = 'number';
+               chatIDinput.value = e.chat_id;
+               chatIDinput.hidden = true;
+
+               let btnWrapper = document.createElement('div');
+               btnWrapper.className = 'col-3 p-0 pl-2 send-btn';
+
+                  let btn = document.createElement('button');
+                  btn.className = ' btn btn-primary btn-block';
+                  btn.type = 'submit';
+                  btn.id = 'seed';
+                  btn.innerHTML = '<b>send</b>';
+
+                  btnWrapper.appendChild(btn);
+               
+            form.appendChild(textareaWrapper);
+            form.appendChild(chatIDinput);
+            form.appendChild(btnWrapper);
+
+         chatForm.appendChild(form);
+
+      
+      contactChat.appendChild(contactChatTop);
+      contactChat.appendChild(chatWrapper);
+      contactChat.appendChild(chatForm);
+
+      document.querySelector('.app').appendChild(contactChat);
+
+      contact.addEventListener('click',()=>{
+         if(!(document.querySelector('.contact-chat.active') == null)){
+            document.querySelector('.contact-chat.active').classList.replace('active','d-none');
+            document.querySelector('.contact.active').classList.remove('active');
+         }
+         if(document.querySelector('#app').classList.contains('d-flex')){
+            document.querySelector('#app').classList.replace('d-flex','d-none');
+         };
+         if(document.querySelector('.noMatch').classList.contains('d-flex')){
+            document.querySelector('.noMatch').classList.replace('d-flex','d-none');
+         };
+
+         document.querySelector('#chatBanner_'+e.chat_id).classList.add('active');
+         document.querySelector('#chat_'+e.chat_id).classList.replace('d-none','active');
+
+         let seen = document.querySelector('#chatBanner_'+e.chat_id+' .chat-info > span');
+
+         if(!seen.classList.contains('d-none')){
+            seen.innerText= '';
+            seen.classList.add('d-none');
+
+            // AJAX SEEN
+
+            $.ajax({
+               type:'POST',
+               url:'/seen',
+               data:{_token : csrf_token,chat_id: e.chat_id},
+               success:function(data){
+               }
+            });
+         }
+   
+      })
+
+      form.addEventListener('submit', (e)=>{
+         submitForm(e,form);
+      });
+
+      formTextarea.addEventListener('keypress',(e)=>{
+         if(e.key === "Enter"){
+            submitForm(e,form);
+         }
+      });
+
+      Echo.private('chat.'+e.chat_id).listen('NewMessage',(e)=>{
+         // adding the message to the chat
+         let message = document.createElement('div');
+         message.className='row m-0 single-message py-1';
+
+         let contentWrapper  = document.createElement('div');
+         contentWrapper.className = 'col p-0 limit';
+         
+         let content = document.createElement('div');
+         content.className = 'px-3 message-content p-0';
+         content.innerText= e.content;
+         
+         let img = document.createElement('div');
+         img.className= 'message-pic align-self-end';
+         img.style.background = 'url(/storage/profile_pictures/'+e.profile_picture+') center / cover no-repeat';
+
+         contentWrapper.appendChild(content);
+         message.appendChild(img);
+         message.appendChild(contentWrapper);
+         
+         document.querySelector('#chat_'+e.chat_id+' .chat-messages').insertAdjacentElement('afterbegin',message);
+
+         
+         // customizing the chat banner
+         
+         let banner = document.querySelector('#chatBanner_'+e.chat_id);
+            // banner message number
+         if(!banner.classList.contains('active')){
+               // if not active
+            let seen = document.querySelector('#chatBanner_'+e.chat_id+' .chat-info > span');
+            seen.classList.remove('d-none');
+            if(seen.innerText.length == 0){
+               seen.innerText = 1;
+            }else{
+               seen.innerText ++;
+            }
+         }else{
+               // if active
+            $.ajax({
+               type:'POST',
+               url:'/seen',
+               data:{_token : csrf_token,chat_id: e.chat_id},
+               success:function(data){
+               }
+            });
+         }
+            // banner message
+         let bannerMessage;
+         if(e.content.length >27){
+           bannerMessage = e.content.substring(0,26)+'...';
+         }else{
+            bannerMessage = e.content;
+         }
+         let messageWrapper = document.querySelector('#chatBanner_'+e.chat_id+' .chat-info p');
+         messageWrapper.innerHTML= `<p>${bannerMessage}</p>`;
+
+            // moving the banner to the begining
+
+         $('#chatBanner_'+e.chat_id).remove();
+         document.querySelector('.contacts').insertAdjacentElement("afterbegin",banner);
+
+      })
+   })
 })

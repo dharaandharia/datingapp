@@ -10,19 +10,18 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewMessage implements ShouldBroadcast
+class NewMatch implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    public $message;
+    public $match;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($match)
     {
-        $this->message = $message;
+        $this->match = $match;
     }
 
     /**
@@ -32,19 +31,16 @@ class NewMessage implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat.'.$this->message->chat_id);
+        return new PrivateChannel('match.'.$this->match->user_id);
     }
 
     public function broadcastWith(){
-        return [
-            'content' => $this->message->content,
-            'profile_picture' => $this->message->user->information->profile_picture,
-            'chat_id' => $this->message->chat_id
+        return[
+            'chat_id' => $this->match->chat_id,
+            'profile_picture' => $this->match->matchWith->information->profile_picture,
+            'first_name' => $this->match->matchWith->information->first_name,
+            'last_name' => $this->match->matchWith->information->last_name,
+            'last_message' => $this->match->chat->last_message
         ];
     }
-
-    // // event name
-    // public function broadcastAs(){
-    //     return 'NewMessage';
-    // }
 }

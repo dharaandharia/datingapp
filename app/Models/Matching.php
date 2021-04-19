@@ -15,11 +15,15 @@ class Matching extends Model
         'chat_id'
     ];
 
-    public function Chat(){
+    public function chat(){
         return $this->belongsTo(Chat::class,'chat_id');
     }
 
     public function matchWith(){
         return $this->belongsTo(User::class,'match_with');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
     }
 }

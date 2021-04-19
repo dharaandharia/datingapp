@@ -308,6 +308,8 @@ section {
     font-weight: 600;
     resize: none;
     height: 44px;
+    padding-top: 7px;
+    font-size: 1rem;
 }
 
 textarea::-webkit-scrollbar {
