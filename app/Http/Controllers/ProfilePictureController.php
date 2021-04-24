@@ -65,7 +65,7 @@ class ProfilePictureController extends Controller
             $fileNameWithExt= $request->file('profile_image')->getClientOriginalName();
 
             //get just filename
-            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $fileName = str_replace(' ','',pathinfo($fileNameWithExt, PATHINFO_FILENAME));
 
             //get just the extension
             $extension = $request->file('profile_image')->getClientOriginalExtension();

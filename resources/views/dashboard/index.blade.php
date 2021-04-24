@@ -14,6 +14,9 @@
                         <div class="d-flex align-items-center">
                             <h2 class="m-0 d-flex align-items-center pl-5"><b>Chats</b></h2>
                         </div>
+                        <div class="col d-flex align-items-center flex-row-reverse">
+                            <i class="fas fa-times p-1 d-lg-none" id="chatListClose"></i>
+                        </div>
                     </div>
 
                     {{-- ALL CHAT CONTACTS --}}
@@ -93,12 +96,15 @@
                     
                     <div class="contact-chat d-none" id="chat_{{$chat->chat_id}}">
                         <div class="contact-chat-top m-0 p-3 row">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-lg fa-angle-left px-3 d-lg-none"></i>
+                            </div>
                             <div class="contact-chat-img ml-2" style="background: url('/storage/profile_pictures/{{$chat->profile_picture}}') center / cover no-repeat"></div>
                             <div class="d-flex align-items-center">
                                 <span class="ml-4">{{$chat->first_name.' '.$chat->last_name}}</span>
                             </div>
                             <div class="col d-flex align-items-center flex-row-reverse">
-                                <i class="fas fa-times p-1" id="chatClose"></i>
+                                <i class="fas fa-times p-1 d-none d-lg-block" id="chatClose"></i>
                             </div>
                         </div>
                         <div class="chat-messages-wrapper p-3">

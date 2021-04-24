@@ -60,12 +60,12 @@ class DashboardController extends Controller
                 $second = Female::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
 
                 $result = $first->merge($second);
-            }elseif( $user->lokking_for == 1 ){
+            }elseif( $user->looking_for == 1 ){
                 $first = Non::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
                 $second = Male::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
 
                 $result = $first->merge($second);
-            }elseif( $user->lokking_for == 2 ){
+            }elseif( $user->looking_for == 2 ){
                 $first = Non::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
                 $second = Female::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
                 $third = Male::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();

@@ -1,3 +1,8 @@
+.fa-paper-plane {
+    opacity: 1 !important;
+    cursor: pointer !important;
+}
+
 section {
     height: calc(99vh - 65.5px);
 }
@@ -161,8 +166,18 @@ section {
 .chat {
     box-shadow: 0px 0px 2px 1px rgba(214, 0, 35, 0.8);
     border-radius: 30px;
-    height: 100%;
     color: black;
+    height: 41rem;
+}
+
+.fa-angle-left {
+    color: rgb(62, 0, 10);
+    cursor: pointer;
+}
+
+.chat-top .fa-times {
+    color: rgb(62, 0, 10);
+    cursor: pointer;
 }
 
 .chat-top {
@@ -352,9 +367,11 @@ textarea::-webkit-scrollbar {
     max-width: 80%;
     word-wrap: break-word;
 }
+
 .limit {
     max-width: calc(100% - 23px) !important;
 }
+
 .single-message.mine .message-content {
     margin-left: 0;
     margin-right: 5px;
@@ -363,7 +380,8 @@ textarea::-webkit-scrollbar {
     color: white;
 }
 
-#chatClose {
-    color: rgb(62, 0, 10);
-    cursor: pointer;
+@media (min-width: 992px) {
+    .app {
+        display: block !important;
+    }
 }

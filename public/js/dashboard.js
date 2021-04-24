@@ -154,6 +154,17 @@ $(document).ready(()=>{
          $('#chatBanner_'+e.chat_id).remove();
          document.querySelector('.contacts').insertAdjacentElement("afterbegin",banner);
 
+         // SM CHAT ICON NUMBER
+
+         if(document.querySelector('.chat-wrapper').classList.contains('d-none')){
+            if(document.querySelector('.sm-msg-num').innerText.length == 0){
+               document.querySelector('.sm-msg-num').innerText = 1;
+            }else{
+               document.querySelector('.sm-msg-num').innerText ++;
+            }
+            document.querySelector('.sm-msg-num').classList.remove('d-none');
+         }
+
       })
 
 
@@ -169,6 +180,11 @@ $(document).ready(()=>{
          };
          if(document.querySelector('.noMatch').classList.contains('d-flex')){
             document.querySelector('.noMatch').classList.replace('d-flex','d-none');
+         };
+
+         if(!document.querySelector('.chat-wrapper').classList.contains('d-none')){
+            document.querySelector('.chat-wrapper').classList.add('d-none');
+            document.querySelector('.app').classList.remove('d-none');
          };
 
          document.querySelector('#chatBanner_'+chat.chat_id).classList.add('active');
@@ -205,6 +221,51 @@ $(document).ready(()=>{
          }else{
             document.querySelector('#app').classList.replace('d-none','d-flex');
          }
+      })
+   })
+
+   // SM CHAT LIST ICON
+
+   document.querySelector('.fa-paper-plane').addEventListener('click',()=>{
+      document.querySelector('.chat-wrapper').classList.remove('d-none');
+      document.querySelector('.app').classList.add('d-none');
+      document.querySelector('.sm-msg-num').innerText = '';
+      document.querySelector('.sm-msg-num').classList.add('d-none');
+
+   });
+
+   // SM CHAT LIST NUMBER
+
+   let num = 0;
+   chats.forEach((one)=>{
+      if(!(one.last_message_by == user.id))
+      num  = num + one.number_of_messages;
+   });
+
+   if(!(num === 0)){
+     document.querySelector('.sm-msg-num').classList.remove('d-none');
+     document.querySelector('.sm-msg-num').innerText = num;
+   }
+
+   // SM CHAT LIST CLOSE
+
+   document.querySelector('#chatListClose').addEventListener('click',()=>{
+      document.querySelector('.chat-wrapper').classList.add('d-none');
+      document.querySelector('.app').classList.remove('d-none');
+   });
+
+   // SM CHAT BACK
+   document.querySelectorAll('.fa-angle-left').forEach((back)=>{
+      back.addEventListener('click',()=>{
+         document.querySelector('.contact-chat.active').classList.replace('active','d-none');
+         document.querySelector('.contact.active').classList.remove('active');
+         if(current === undefined){
+            document.querySelector('.noMatch').classList.replace('d-none','d-flex');
+         }else{
+            document.querySelector('#app').classList.replace('d-none','d-flex');
+         }
+         document.querySelector('.chat-wrapper').classList.remove('d-none');
+         document.querySelector('.app').classList.add('d-none');
       })
    })
 
@@ -298,7 +359,18 @@ $(document).ready(()=>{
       }
    }
 
+      // *****************************************************************
+      // ******************* recieve new match ***************************
+      // *****************************************************************
+
+
+      
    Echo.private('match.'+user.id).listen('NewMatch',(e)=>{
+         
+      let checkNoContacts = document.querySelector('.no-contacts');
+      if(checkNoContacts){
+         checkNoContacts.classList.replace('d-flex','d-none');
+      }
 
       // adding new match to contact list
       let contact = document.createElement('div');
@@ -341,6 +413,25 @@ $(document).ready(()=>{
       let contactChatTop = document.createElement('div');
       contactChatTop.className = 'contact-chat-top m-0 p-3 row';
 
+         let chatBack = document.createElement('div');
+         chatBack.className = 'd-flex align-items-center';
+
+            let chatBackIcon = document.createElement('i');
+            chatBackIcon.className = 'fas fa-lg fa-angle-left px-3 d-lg-none';
+            chatBackIcon.addEventListener('click',()=>{
+               document.querySelector('.contact-chat.active').classList.replace('active','d-none');
+               document.querySelector('.contact.active').classList.remove('active');
+               if(current === undefined){
+                  document.querySelector('.noMatch').classList.replace('d-none','d-flex');
+               }else{
+                  document.querySelector('#app').classList.replace('d-none','d-flex');
+               }
+               document.querySelector('.chat-wrapper').classList.remove('d-none');
+               document.querySelector('.app').classList.add('d-none');
+            });
+
+            chatBack.appendChild(chatBackIcon);
+
          let contactChatImg = document.createElement('div');
          contactChatImg.className = 'contact-chat-img ml-2';
          contactChatImg.style.background = 'url(/storage/profile_pictures/'+e.profile_picture+') center / cover no-repeat';
@@ -358,7 +449,7 @@ $(document).ready(()=>{
          close.className = 'col d-flex align-items-center flex-row-reverse';
 
             let closeButton = document.createElement('i');
-            closeButton.classList = 'fas fa-times p-1';
+            closeButton.classList = 'fas fa-times p-1 d-none d-lg-block';
             closeButton.id = 'chatClose';
             closeButton.addEventListener('click',()=>{
                document.querySelector('.contact-chat.active').classList.replace('active','d-none');
@@ -372,6 +463,7 @@ $(document).ready(()=>{
 
             close.appendChild(closeButton);
          
+         contactChatTop.appendChild(chatBack);
          contactChatTop.appendChild(contactChatImg);
          contactChatTop.appendChild(nameWrapper);
          contactChatTop.appendChild(close);

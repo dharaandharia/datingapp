@@ -10,7 +10,7 @@ body {
     background-color: rgba(214, 0, 35, 0.02) !important;
 }
 
-.navbar-nav img {
+.nav-img {
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -19,15 +19,10 @@ body {
     position: relative;
 }
 
-#pMenu {
-    height: 150px;
-    width: 300px;
-    background-color: rgba(0, 142, 214);
-    position: absolute;
-    right: -10px;
-    bottom: -150px;
-    border-radius: 5px;
-    z-index: 2;
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
+    display: none;
 }
 
 .pMenu-wrapper {
@@ -36,29 +31,79 @@ body {
     position: relative;
 }
 
-.arrow {
+#pMenu {
+    width: 300px;
+    background-color: rgb(67, 139, 175);
+    position: absolute;
+    right: -10px;
+    top: 50px;
+    border-radius: 5px;
+    z-index: 2;
+    color: white;
+}
+
+#pMenu .arrow {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: rgba(0, 142, 214);
+    background-color: rgb(67, 139, 175);
     top: -7.5px;
     right: 20px;
     transform: rotate(45deg);
 }
 
-.collapsing {
-    -webkit-transition: none;
-    transition: none;
-    display: none;
+.hide-arrow {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
+#pMenu a {
+    color: white;
+    text-decoration: none;
+}
+
+#pMenu a > div {
+    z-index: 2;
+}
+
+#pMenu a:hover > div {
+    background-color: rgb(94, 150, 179);
+    border-radius: 5px;
+}
+
+#pMenu i {
+    color: white;
+}
+
+.nav-logout {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+    text-align: left;
+    height: 35px;
+    border-radius: 5px;
+}
+
+.nav-logout:hover {
+    background-color: rgb(94, 150, 179);
+    border-radius: 5px;
+}
 .fix-part {
     background-color: rgba(214, 0, 35, 0.02);
 }
 
-nav i {
+#nav-sm i {
     color: #d60023;
     cursor: pointer;
+}
+
+nav .fa-paper-plane {
+    cursor: auto;
+    opacity: 0;
 }
 
 .nav-rest {
@@ -97,4 +142,32 @@ nav i {
     width: 100%;
     color: #d60023;
     text-align: left;
+}
+
+.sm-msg-num-wrapper {
+    position: relative;
+}
+
+.sm-msg-num {
+    background-color: rgba(0, 142, 214, 1);
+    position: absolute;
+    right: 7px;
+    top: 13px;
+    border-radius: 50px;
+    min-width: 19px;
+    height: 19px;
+    color: white;
+    transform: scale(0.85, 0.85);
+    font-size: 0.7rem;
+    padding: 1.5px 3px 0px 3px;
+}
+
+@media (min-width: 992px) {
+    .content {
+        display: block !important;
+    }
+
+    #nav-sm {
+        display: none !important;
+    }
 }

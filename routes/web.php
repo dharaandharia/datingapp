@@ -50,14 +50,11 @@ Route::group(['middleware' => ['auth','check.profile']],function(){
     Route::post('dislike',[AppAjaxController::class, 'dislike']);
     Route::post('sendmessage', [MessageController::class, 'store']);
     Route::post('seen', [MessageController::class, 'seen']);
-    
 });
 
 
-Route::get('try',function(){
+// Route::get('try',function(){
 
-    $x = User::all();
+//     Artisan::call('websockets:serve');
 
-    return $x;
-
-});
+// });
