@@ -36,7 +36,6 @@
                                 <a href="{{ url('/profile' )}}">
                                     <div class="py-2 d-flex align-items-center row m-0">
                                         <div class="col-3">
-
                                             <div class="nav-img" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div>
                                         </div>
                                         <h6 class="d-flex justify-items-center m-0 p-0 col-9">{{ $user->first_name}} {{$user->last_name}}</h6>

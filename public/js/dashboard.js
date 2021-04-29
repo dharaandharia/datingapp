@@ -1,5 +1,5 @@
 $(document).ready(()=>{
-
+   console.log(chats);
    let x = 0;
    let current = result[x];
 
@@ -227,6 +227,14 @@ $(document).ready(()=>{
    // SM CHAT LIST ICON
 
    document.querySelector('.fa-paper-plane').addEventListener('click',()=>{
+      if(!(document.querySelector('.fa-times').classList.contains('d-none'))){
+        document.querySelector('.fa-times').classList.add('d-none');
+        document.querySelector('.fa-bars').classList.remove('d-none');
+        document.querySelector('.nav-rest').classList.add('d-none');
+        document.querySelector('.content').classList.remove('d-none');
+      }
+
+      if(!(document.querySelector('.app').classList.contains('d-none')))
       document.querySelector('.chat-wrapper').classList.remove('d-none');
       document.querySelector('.app').classList.add('d-none');
       document.querySelector('.sm-msg-num').innerText = '';
@@ -534,6 +542,11 @@ $(document).ready(()=>{
             document.querySelector('.noMatch').classList.replace('d-flex','d-none');
          };
 
+         if(!document.querySelector('.chat-wrapper').classList.contains('d-none')){
+            document.querySelector('.chat-wrapper').classList.add('d-none');
+            document.querySelector('.app').classList.remove('d-none');
+         };
+
          document.querySelector('#chatBanner_'+e.chat_id).classList.add('active');
          document.querySelector('#chat_'+e.chat_id).classList.replace('d-none','active');
 
@@ -627,6 +640,28 @@ $(document).ready(()=>{
          $('#chatBanner_'+e.chat_id).remove();
          document.querySelector('.contacts').insertAdjacentElement("afterbegin",banner);
 
+         // SM CHAT ICON NUMBER
+
+         if(document.querySelector('.chat-wrapper').classList.contains('d-none')){
+            if(document.querySelector('.sm-msg-num').innerText.length == 0){
+               document.querySelector('.sm-msg-num').innerText = 1;
+            }else{
+               document.querySelector('.sm-msg-num').innerText ++;
+            }
+            document.querySelector('.sm-msg-num').classList.remove('d-none');
+         }
+
       })
+
+      // NOTIFY A NEW MATCH
+
+      if(document.querySelector('.chat-wrapper').classList.contains('d-none')){
+         if(document.querySelector('.sm-msg-num').innerText.length == 0){
+            document.querySelector('.sm-msg-num').innerText = 1;
+         }else{
+            document.querySelector('.sm-msg-num').innerText ++;
+         }
+         document.querySelector('.sm-msg-num').classList.remove('d-none');
+      }
    })
 })

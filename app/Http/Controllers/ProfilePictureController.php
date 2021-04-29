@@ -32,6 +32,9 @@ class ProfilePictureController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->status->information){
+            return redirect('/profile/create');
+        }
         if(Auth::user()->status->profile_picture){
             return redirect('/dashboard');
         }
@@ -48,9 +51,6 @@ class ProfilePictureController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->status->profile_picture){
-            return redirect('/dashboard');
-        }
         
         Validator::make($request->all(),[
             'profile_image' => ['required','image','max:1999']
@@ -119,7 +119,11 @@ class ProfilePictureController extends Controller
         if(!Auth::user()->status->profile_picture){
             return redirect('profilePicture/create');
         }
+        if(!Auth::user()->status->tendencies){
+            return redirect('set');
+        }
         return redirect('/profile');
+
     }
 
     /**
@@ -137,6 +141,43 @@ class ProfilePictureController extends Controller
         if(!Auth::user()->status->profile_picture){
             return redirect('profilePicture/create');
         }
+        if(!Auth::user()->status->tendencies){
+            return redirect('set');
+        }
+
+        Validator::make($request->all(),[
+            'profile_image' => ['required','image','max:1999']
+        ],$messages=[
+            'profile_image.required' => 'Please select a photo.',
+            'profile_image.image' => 'Invalid File Extension',
+            'profile_image.max' => 'File must be less than 2 mb'
+        ])->validate();
+
+        if ($request->hasFile('profile_image')){
+            //get file name with the extension
+            $fileNameWithExt= $request->file('profile_image')->getClientOriginalName();
+
+            //get just filename
+            $fileName = str_replace(' ','',pathinfo($fileNameWithExt, PATHINFO_FILENAME));
+
+            //get just the extension
+            $extension = $request->file('profile_image')->getClientOriginalExtension();
+
+            //file name to store(unique)
+            $fileNameToStore = $fileName.'_'.time().'.'.$extension;
+
+            //upload image
+            $path = $request->file('profile_image')->storeAs('public/profile_pictures',$fileNameToStore);
+        }else{
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        Auth::user()->information->profile_picture = $fileNameToStore;
+        Auth::user()->information->save();
+
+        Auth::user()->status->profile_picture = true;
+        Auth::user()->status->save();
+
         return redirect('/profile');
     }
 
