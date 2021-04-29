@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function status(){
         return $this->hasOne(UserStatus::class);
     }
+
+    public function Matches(){
+        return $this->hasMany(Matching::class);
+    }
 }

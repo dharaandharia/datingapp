@@ -60,12 +60,12 @@ class DashboardController extends Controller
                 $second = Female::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
 
                 $result = $first->merge($second);
-            }elseif( $user->lokking_for == 1 ){
+            }elseif( $user->looking_for == 1 ){
                 $first = Non::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
                 $second = Male::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
 
                 $result = $first->merge($second);
-            }elseif( $user->lokking_for == 2 ){
+            }elseif( $user->looking_for == 2 ){
                 $first = Non::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
                 $second = Female::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
                 $third = Male::where('looking_for','=','2')->where('age','>=',$user->from)->where('age','<=',$user->to)->get();
@@ -84,6 +84,20 @@ class DashboardController extends Controller
             return $item->getUser->information;
         });
 
-        return view('dashboard.index')->with(['user' => $user , 'result' => $result]);
+        $chats = DB::table('matchings')->where('matchings.user_id',Auth::user()->id)->join('chats','matchings.chat_id','=','chats.id')->join('profile_information','matchings.match_with','=','profile_information.user_id')->select('matchings.chat_id','matchings.match_with','chats.last_message_by','chats.last_message','chats.number_of_messages','chats.seen','chats.updated_at','profile_information.first_name','profile_information.last_name','profile_information.profile_picture')->orderBy('updated_at','desc')->get();
+
+        // $toArray = json_decode(json_encode($chats));
+        
+        // // Adding messages
+        // foreach($toArray as $chat){
+        //     $chat->messages = json_decode(json_encode(DB::table('messages')->where('chat_id',$chat->chat_id)->orderBy('created_at','desc')->select('content','user_id')->get()));
+        // };
+        
+        $chats->map(function($item){
+            $item->messages = DB::table('messages')->where('chat_id',$item->chat_id)->orderBy('created_at','desc')->select('content','user_id')->get();
+            return $item;
+        });
+
+        return view('dashboard.index')->with(['user' => $user , 'result' => ($result) , 'chats' => $chats]);
     }
 }

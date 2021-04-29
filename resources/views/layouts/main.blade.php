@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Wegatyou</title>
     <link rel="icon" href="{{ asset('images/logo.png') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -27,18 +28,25 @@
             </a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item p-li">
-                    <a class="nav-link" href="#pMenu" data-toggle="collapse" aria-expanded="false" aria-controls="pMenu"><img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="ppThumb"></a>
+                    <a class="nav-link" href="#pMenu" data-toggle="collapse" aria-expanded="false" aria-controls="pMenu"><div class="nav-img" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div></a>
                     <div class="collapse" id="pMenu" >
                         <div class="pMenu-wrapper">
                             <div class="arrow"></div>
-                            <form action="{{ url('/logout') }}" method="POST" class="px-3 pt-5">
-                                @csrf
-                                <div style="height:50px"></div>
-                                <button type="submit" class="nav-logout btn btn-outline-danger btn-block">Logout</button>
-                            </form>
-                        </div>
-
-                        
+                            <div class="p-0 m-0 hide-arrow">
+                                <a href="{{ url('/profile' )}}">
+                                    <div class="py-2 d-flex align-items-center row m-0">
+                                        <div class="col-3">
+                                            <div class="nav-img" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div>
+                                        </div>
+                                        <h6 class="d-flex justify-items-center m-0 p-0 col-9">{{ $user->first_name}} {{$user->last_name}}</h6>
+                                    </div>
+                                </a>
+                                <form action="{{ url('/logout') }}" method="POST" class="">
+                                    @csrf
+                                    <button type="submit" class="nav-logout row p-0 m-0 d-flex align-items-center"><i class="fas fa-lg fa-sign-out-alt col-3 p-0 text-center"></i><div class="col-9 p-0">Logout</div></button>
+                                </form>
+                            </div>
+                        </div>                        
                     </div>
                 </li>
             </ul>
@@ -64,8 +72,9 @@
                         </div>
                     </a>
                 </div>
-                <div class="row">
+                <div class="row sm-msg-num-wrapper">
                     <i class="p-3 fas fa-lg fa-paper-plane align-self-center pt-1"></i>
+                    <span class="sm-msg-num text-center d-none"></span>
                 </div>
             </div>
         </div>
@@ -75,8 +84,10 @@
 
                 <a href="{{ url('/profile' )}}">
                     <div class="py-3 d-flex align-items-center">
-                        <img src="{{ asset('storage/profile_pictures/'.$user->profile_picture) }}" alt="ppThumb" class="mx-3">
-                        <h6 class="d-flex justify-items-center m-0">{{ $user->first_name}} {{$user->last_name}}</h6>
+                        <div class="col-3 justify-content-center p-0 d-flex">
+                            <div class="nav-img m-0" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div>
+                        </div>
+                            <h6 class="d-flex justify-items-center m-0 p-0 col-9 text-left">{{ $user->first_name}} {{$user->last_name}}</h6>
                     </div>
                 </a>
 
@@ -84,7 +95,7 @@
 
                 <form action="{{ url('/logout') }}" method="POST" class="">
                     @csrf
-                    <button type="submit" class="logout-sm m-3"><i class="fas fa-lg fa-sign-out-alt pr-4"></i>Log out</button>
+                    <button type="submit" class="logout-sm p-0 d-flex align-items-center my-3"><i class="fas fa-lg fa-sign-out-alt col-3 p-0 text-center"></i><div class="col-9 p-0">Log out</div></button>
                 </form>
 
                 <hr>

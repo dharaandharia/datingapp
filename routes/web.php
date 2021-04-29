@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfilePictureController;
 use App\Http\Controllers\AdditionalInformationController;
 use App\Http\Controllers\TendenciesController;
 use App\Http\Controllers\AppAjaxController;
+use App\Http\Controllers\MessageController;
 
 
 use Illuminate\Support\Facades\DB;
@@ -41,20 +42,19 @@ Route::group(['middleware'=> ['auth']],function (){
 
 
 
-Route::group(['middleware' => ['auth','check.profile']],function(){
-    
+Route::group(['middleware' => ['auth','check.profile']],function(){  
+
     Route::get('dashboard',[DashboardController::class,'index']); 
     Route::get('moreAbout', [AdditionalInformationController::class, 'create']);
     Route::post('like',[AppAjaxController::class, 'like']);
     Route::post('dislike',[AppAjaxController::class, 'dislike']);
-
+    Route::post('sendmessage', [MessageController::class, 'store']);
+    Route::post('seen', [MessageController::class, 'seen']);
 });
 
 
-Route::get('try',function(){
+// Route::get('try',function(){
 
-    $x = User::all();
+//     Artisan::call('websockets:serve');
 
-    return $x;
-
-});
+// });
