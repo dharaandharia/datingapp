@@ -16,7 +16,7 @@ class CreateChatsTable extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->integer('last_message_by')->nullable();
-            $table->text('last_message')->default('You have got a new MATCH!!!');
+            $table->text('last_message');
             $table->integer('number_of_messages')->default(0);
             $table->boolean('seen')->default(false);
             $table->timestamps();

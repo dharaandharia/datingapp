@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 use App\Models\ProfileInformation;
+use App\Models\Preference;
+use App\Models\FavoriteFood;
+use App\Models\FavoriteDrink;
 
 class ProfileInformationController extends Controller
 {
@@ -27,8 +31,34 @@ class ProfileInformationController extends Controller
         }
 
         $user = Auth::user()->information;
+        $food_pref = Preference::all()->reject(function($one){
+            if(!Auth::user()->preferences->where('food_pref',$one->food_pref)->first() == null){
+                return $one;
+            }
+        })->map(function($one){
+            return $one->food_pref;
+        })->values();
+        $pref = Auth::user()->preferences;
 
-        return view('profile.index')->with('user', $user);
+        $favoriteFood = FavoriteFood::all()->reject(function($one){
+            if(!Auth::user()->favoriteFoods->where('favorite_food',$one->favorite_food)->first() == null){
+                return $one;
+            }
+        })->map(function($one){
+            return $one->favorite_food;
+        })->values();
+        $userFavoriteFoods = Auth::user()->favoriteFoods;
+
+        $favoriteDrink = FavoriteDrink::all()->reject(function($one){
+            if(!Auth::user()->favoriteDrinks->where('favorite_drink',$one->favorite_drink)->first() == null){
+                return $one;
+            }
+        })->map(function($one){
+            return $one->favorite_drink;
+        })->values();
+        $userFavoriteDrinks = Auth::user()->favoriteDrinks;
+
+        return view('profile.index')->with(['user' => $user,'food_pref' => $food_pref,'pref' => $pref,'favoriteFood' => $favoriteFood, 'userFavoriteFoods' => $userFavoriteFoods,'favoriteDrink' => $favoriteDrink, 'userFavoriteDrinks' => $userFavoriteDrinks]);
     }
 
     /**
@@ -39,7 +69,7 @@ class ProfileInformationController extends Controller
     public function create()
     {
         if(Auth::user()->status->information){
-            return redirect('profilePicture/create');
+            return redirect('/dashboard');
         }
 
         return view('profile.create');
@@ -54,7 +84,7 @@ class ProfileInformationController extends Controller
     public function store(Request $request)
     {
         if(Auth::user()->status->information){
-            return redirect('/profilePicture/create');
+            return redirect('/dashboard');
         }
 
         Validator::make($request->all(), [
@@ -96,7 +126,24 @@ class ProfileInformationController extends Controller
      */
     public function show($id)
     {
-        //
+        if(!Auth::user()->status->information){
+            return redirect('/profile/create');
+        }
+        if(!Auth::user()->status->profile_picture){
+            return redirect('profilePicture/create');
+        }
+        if(!Auth::user()->status->tendencies){
+            return redirect('set');
+        }
+        if(Auth::user()->matches->where('match_with',$id)->first() == null){
+            return redirect('/profile');
+        }
+
+        $user = Auth::user()->information;
+
+        $userView = User::find($id);
+
+        return view('profile.view')->with(['user' => $user, 'view' => $userView]);
     }
 
     /**

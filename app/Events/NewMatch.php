@@ -37,6 +37,7 @@ class NewMatch implements ShouldBroadcast
     public function broadcastWith(){
         return[
             'chat_id' => $this->match->chat_id,
+            'match_with' => $this->match->match_with,
             'profile_picture' => $this->match->matchWith->information->profile_picture,
             'first_name' => $this->match->matchWith->information->first_name,
             'last_name' => $this->match->matchWith->information->last_name,

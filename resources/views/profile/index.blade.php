@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('styles')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
@@ -61,16 +62,123 @@
     </div>
 </div>
 <div>
-    <div class="container bg-white">
+    <div class="container">
         <div class="row pt-3">
             <div class="col-lg-3">
-                <div class="pl-lg-4">
-                    <h4><b>About:</b></h4>
-                    <b class="h4 font-weight-bold">{{ date('d/m/Y',strtotime($user->b_day)) }}</b><br>Date of birth<br>
-                    <b>{{ $user->sex }}</b><br>Sex:<br>
+                <div class="pl-4 about-section">
+                    <h1 class="mb-3"><b>About:</b></h1>
+                    <div class="about-info">
+                        <b class="h5 font-weight-bold text-dark">{{ date('d/m/Y',strtotime($user->b_day)) }}</b><br><span class="text-muted">Date of birth</span><br>
+                    </div>
+                    <div class="mt-3 about-info">
+                        <b class="h5 font-weight-bold text-dark">{{ $user->sex }}</b><br><span class="text-muted">Sex</span><br>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9">
+                <div class="wall-info mt-3 mt-lg-0" id="pref">
+                    <div><b class="h4 font-weight-bold text-dark">Food Preference</b><span class="float-right"><i class="fas fa-edit px-3 openEditState"></i><i class="fas fa-times px-3 d-none closeEditState"></i></span></div>
+                    <hr class="mx-0 my-1">
+                    <div class="row mt-2 showState">
+                        <div class="col-3 d-flex justify-content-center align-items-center"><i class="fas fa-utensils fa-2x"></i></div>
+                        <div class="col-9 d-flex align-items-center">
+                            @if (!count($pref)==0)
+                            <ul class="m-0">
+                                @foreach ($pref as $one)
+                                <li id="foodPref_{{$one->id}}">{{ $one->food_pref }}</li>
+                                @endforeach
+                            </ul>
+                            @else
+                                -You have no preferences !!!<br>
+                                Update your profile to enhance your profile.
+                            @endif
+                        </div>
+                    </div>
+                    <div class="editState d-none mt-2">
+                        @if (!count($pref)==0)
+                                @foreach ($pref as $one)
+                                    <div class="edit-state-element" id="{{$one->id}}">
+                                        {{$one->food_pref}}
+                                        <i class="fas fa-times pl-2"></i>
+                                    </div>
+                                @endforeach
+                        @endif
+                        <form id="prefForm" class="mt-3 d-flex justify-content-center align-items-center">
+                            @csrf
+                            <select multiple id="preferences"></select>
+                            <button type="submit" class="btn btn-outline-primary btn-sm ml-3">Add</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="wall-info mt-3" id="favoriteFood">
+                    <div><b class="h4 font-weight-bold text-dark">Favorite Food</b><span class="float-right"><i class="fas fa-edit px-3 openEditState"></i><i class="fas fa-times px-3 d-none closeEditState"></i></span></div>
+                    <hr class="mx-0 my-1">
+                    <div class="row mt-2 showState">
+                        <div class="col-3 d-flex justify-content-center align-items-center"><i class="fas fa-hamburger fa-2x"></i></div>
+                        <div class="col-9 d-flex align-items-center">
+                            @if (!count($userFavoriteFoods)==0)
+                            <ul class="m-0">
+                                @foreach ($userFavoriteFoods as $one)
+                                <li id="favorite_f{{$one->id}}">{{ $one->favorite_food }}</li>
+                                @endforeach
+                            </ul>
+                            @else
+                                -You have no favorite foods !!!<br>
+                                Update your profile to enhance your profile.
+                            @endif
+                        </div>
+                    </div>
+                    <div class="editState d-none mt-2">
+                        @if (!count($pref)==0)
+                                @foreach ($userFavoriteFoods as $one)
+                                    <div class="edit-state-element" id="{{$one->id}}">
+                                        {{$one->favorite_food}}
+                                        <i class="fas fa-times pl-2"></i>
+                                    </div>
+                                @endforeach
+                        @endif
+                        <form  id="favoriteFoodForm" class="mt-3 d-flex justify-content-center align-items-center">
+                            @csrf
+                            <select multiple id="favoriteFoods"></select>
+                            <button type="submit" class="btn btn-outline-primary btn-sm ml-3">Add</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="wall-info my-3" id="favoriteDrink">
+                    <div><b class="h4 font-weight-bold text-dark">Favorite Drink</b><span class="float-right"><i class="fas fa-edit px-3 openEditState"></i><i class="fas fa-times px-3 d-none closeEditState"></i></span></div>
+                    <hr class="mx-0 my-1">
+                    <div class="row mt-2 showState">
+                        <div class="col-3 d-flex justify-content-center align-items-center"><i class="fas fa-cocktail fa-2x"></i></div>
+                        <div class="col-9 d-flex align-items-center">
+                            @if (!count($userFavoriteDrinks)==0)
+                            <ul class="m-0">
+                                @foreach ($userFavoriteDrinks as $one)
+                                <li id="favorite_d{{$one->id}}">{{ $one->favorite_drink }}</li>
+                                @endforeach
+                            </ul>
+                            @else    
+                                -You have no favorite drinks !!!<br>
+                                Update your profile to enhance your profile.
+                            @endif
+                        </div>
+                    </div>
+                    <div class="editState d-none my-2">
+                        @if (!count($pref)==0)
+                                @foreach ($userFavoriteDrinks as $one)
+                                    <div class="edit-state-element" id="{{$one->id}}">
+                                        {{$one->favorite_drink}}
+                                        <i class="fas fa-times pl-2"></i>
+                                    </div>
+                                @endforeach
+                        @endif
+                        <form  id="favoriteDrinkForm" class="mt-3 d-flex justify-content-center align-items-center">
+                            @csrf
+                            <select multiple id="favoriteDrinks"></select>
+                            <button type="submit" class="btn btn-outline-primary btn-sm ml-3">Add</button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -78,6 +186,14 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/profile.js') }}"></script>
     <script src="{{ asset('js/create_profile_image.js') }}"></script>
+    <script>
+        let favoriteDrink = @json($favoriteDrink);
+        let favoriteFood = @json($favoriteFood);
+        let food_pref = @json($food_pref);
+        let csrf_token = '{{csrf_token()}}';
+    </script>
+
 @endsection

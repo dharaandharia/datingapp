@@ -52,4 +52,16 @@ class User extends Authenticatable
     public function Matches(){
         return $this->hasMany(Matching::class);
     }
+
+    public function preferences(){
+        return $this->hasMany(UserPreferences::class);
+    }
+
+    public function favoriteFoods(){
+        return $this->hasMany(UserFavoriteFoods::class);
+    }
+
+    public function favoriteDrinks(){
+        return $this->hasMany(UserFavoriteDrinks::class);
+    }
 }

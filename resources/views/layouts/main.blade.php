@@ -19,10 +19,10 @@
             <a href="{{ url('/')}}" class="navbar-brand">
                 <div class="row">
                     <div class="align-self-center ml-3 mr-1">
-                        <img src="images/logo.png" alt="logo" style="height: 31px">
+                        <img src="{{ asset('images/logo.png') }}" alt="logo" style="height: 31px">
                     </div>
                     <div class="align-self-center">
-                        <img src="images/wegatyou.png" alt="brandtext" style="height:16px">
+                        <img src="{{ asset('images/wegatyou.png') }}" alt="brandtext" style="height:16px">
                     </div>                        
                 </div>
             </a>

@@ -101,7 +101,7 @@
                             </div>
                             <div class="contact-chat-img ml-2" style="background: url('/storage/profile_pictures/{{$chat->profile_picture}}') center / cover no-repeat"></div>
                             <div class="d-flex align-items-center">
-                                <span class="ml-4">{{$chat->first_name.' '.$chat->last_name}}</span>
+                                <span class="ml-4"><a href="{{ url('/profile/'.$chat->match_with)}}">{{$chat->first_name.' '.$chat->last_name}}</a></span>
                             </div>
                             <div class="col d-flex align-items-center flex-row-reverse">
                                 <i class="fas fa-times p-1 d-none d-lg-block" id="chatClose"></i>
@@ -156,6 +156,7 @@
 @section('scripts')
     <script>
         let chats = @json($chats);
+        console.log(chats);
         let result = @json($result);
         let user = @json(Auth::user());
         let csrf_token = '{{csrf_token()}}';
