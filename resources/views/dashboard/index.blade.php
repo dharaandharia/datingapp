@@ -156,7 +156,6 @@
 @section('scripts')
     <script>
         let chats = @json($chats);
-        console.log(chats);
         let result = @json($result);
         let user = @json(Auth::user());
         let csrf_token = '{{csrf_token()}}';

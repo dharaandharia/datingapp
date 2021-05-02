@@ -1,5 +1,4 @@
 $(document).ready(()=>{
-   console.log(chats);
    let x = 0;
    let current = result[x];
 
