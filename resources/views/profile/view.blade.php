@@ -98,5 +98,4 @@
 
 @section('scripts')
     <script src="{{ asset('js/profile.js') }}"></script>
-    <script src="{{ asset('js/create_profile_image.js') }}"></script>
 @endsection
