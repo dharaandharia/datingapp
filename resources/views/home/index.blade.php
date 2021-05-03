@@ -274,13 +274,18 @@
         <footer>
             <div class="container text-center">
                 <div class="row py-5">
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-4 text-center">
                         <h4 class="pb-2">Follow WeGatYou</h4>
                         <a href="#"><i class="px-3 fab fa-2x fa-twitter-square"></i></a>
                         {{-- <a href="#"><i class="px-3 fab fa-2x fa-facebook-square"></i></a> --}}
                         <a href="#"><i class="px-3 fab fa-2x fa-instagram-square"></i></a>
                     </div>
-                    <div class="col-md-6 text-center pt-5 pt-md-0">
+                    <div class="col-md-4 legal pt-4 pt-md-0">
+                        <a class="d-block" href="{{ url('/privacypolicy') }}">Privacy Policy</a>
+                        <a class="d-block my-2" href="{{ url('/termsandconditions') }}">Terms and Conditions</a>
+                        <a  class="d-block" href="{{ url('/useragreement') }}">User Agreement</a>
+                    </div>
+                    <div class="col-md-4 text-center pt-5 pt-md-2">
                         <div>
                             <img src="images/wegatyou.png"alt="">
                         </div>

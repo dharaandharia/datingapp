@@ -8,6 +8,7 @@ use App\Http\Controllers\AdditionalInformationController;
 use App\Http\Controllers\TendenciesController;
 use App\Http\Controllers\AppAjaxController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\LegalController;
 use Illuminate\Http\Request;
 
 
@@ -61,3 +62,7 @@ Route::group(['middleware' => ['auth','check.profile']],function(){
     Route::post('seen', [MessageController::class, 'seen']);
 
 });
+
+Route::get('privacypolicy', [LegalController::class, 'privacyPolicy']);
+Route::get('termsandconditions', [LegalController::class, 'termsAndConditions']);
+Route::get('useragreement', [LegalController::class, 'userAgreement']);

@@ -387,6 +387,16 @@ footer span {
     height: 28px;
 }
 
+.legal a {
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.legal a:hover {
+    color: black;
+}
+
 /* ***************************************************** */
 /* ***************     media queries    **************** */
 /* ***************************************************** */
