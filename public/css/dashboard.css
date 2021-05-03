@@ -39,6 +39,20 @@ section {
     padding-top: 10px;
 }
 
+.fa-undo {
+    position: absolute !important;
+    top: 20px;
+    left: 20px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 13px;
+    color: white;
+}
+.fa-undo:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 .btn-wrapper {
     position: absolute;
     bottom: -25px;

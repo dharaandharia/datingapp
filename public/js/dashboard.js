@@ -26,7 +26,7 @@ $(document).ready(()=>{
             url:'/like',
             data:{_token : csrf_token, user_id : current.user_id},
             success:function(data) {
-               x++;
+               result.splice(x,1);
                current = result[x];
                if(!(current === undefined)){
                   document.querySelector('.img').style.background = 'url(/storage/profile_pictures/'+current.profile_picture+') center / cover no-repeat';
@@ -70,6 +70,29 @@ $(document).ready(()=>{
             }
          });
       }
+   })
+
+   // BACK ACTION
+
+   document.querySelector('#back').addEventListener('click',()=>{
+      document.querySelector('.spinner').classList.add('show');
+      document.querySelector('.disable-like').classList.remove('d-none');
+      document.querySelector('.disable-dislike').classList.remove('d-none');
+      setTimeout(()=>{
+         x--;
+         current = result[x];
+         if(!(current === undefined)){
+            document.querySelector('.img').style.background = 'url(/storage/profile_pictures/'+current.profile_picture+') center / cover no-repeat';
+            document.querySelector('.infos').innerText = current.first_name+' '+current.last_name+', '+getAge(current.b_day);
+            document.querySelector('.spinner').classList.remove('show');
+            document.querySelector('.disable-like').classList.add('d-none');
+            document.querySelector('.disable-dislike').classList.add('d-none');
+         }else{
+            document.querySelector('.spinner').classList.remove('show');
+            document.querySelector('.disable-like').classList.add('d-none');
+            document.querySelector('.disable-dislike').classList.add('d-none');
+         }
+      },500)
    })
 
    // GETTING AGE

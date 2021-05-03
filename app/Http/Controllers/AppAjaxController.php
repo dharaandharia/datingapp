@@ -49,9 +49,11 @@ class AppAjaxController extends Controller
     }
 
     public function dislike(Request $request){
-        DB::table(Auth::user()->id.'_dislikes')->insert([
-            'user_id' => $request->user_id
-        ]);
+        if(DB::table(Auth::user()->id.'_dislikes')->where('user_id', $request->user_id)->first()==null){
+            DB::table(Auth::user()->id.'_dislikes')->insert([
+                'user_id' => $request->user_id
+            ]);
+        }
     }
 
     public function setFoodPref(Request $request){

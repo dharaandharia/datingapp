@@ -9,6 +9,7 @@ use App\Http\Controllers\TendenciesController;
 use App\Http\Controllers\AppAjaxController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\SubscribtionController;
 use Illuminate\Http\Request;
 
 
@@ -60,6 +61,8 @@ Route::group(['middleware' => ['auth','check.profile']],function(){
 
     Route::post('sendmessage', [MessageController::class, 'store']);
     Route::post('seen', [MessageController::class, 'seen']);
+
+    Route::get('subscribtion',[SubscribtionController::class, 'index']);
 
 });
 

@@ -41,6 +41,16 @@
                                         <h6 class="d-flex justify-items-center m-0 p-0 col-9">{{ $user->first_name}} {{$user->last_name}}</h6>
                                     </div>
                                 </a>
+                                <a href="{{ url('/subscribtion') }}">
+                                    <div class="row p-0 m-0 d-flex align-items-center pMenu-item">
+                                        <div class="col-3 p-0 text-center">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            Subscription
+                                        </div>
+                                    </div>
+                                </a>
                                 <form action="{{ url('/logout') }}" method="POST" class="">
                                     @csrf
                                     <button type="submit" class="nav-logout row p-0 m-0 d-flex align-items-center"><i class="fas fa-lg fa-sign-out-alt col-3 p-0 text-center"></i><div class="col-9 p-0">Logout</div></button>
@@ -60,7 +70,6 @@
                     <i class="p-3 fas fa-lg fa-times align-self-center d-none"></i>
                 </div>
                 <div>
-    
                     <a href="{{ url('/')}}" class="navbar-brand py-3">
                         <div class="row">
                             <div class="align-self-center ml-3 mr-1">
@@ -90,7 +99,15 @@
                             <h6 class="d-flex justify-items-center m-0 p-0 col-9 text-left">{{ $user->first_name}} {{$user->last_name}}</h6>
                     </div>
                 </a>
-
+                <hr>
+                <a href="{{ url('/subscribtion') }}">
+                    <div class="p-0 d-flex align-items-center my-3">
+                        <div class="col-3 p-0 text-center">
+                            <i class="fas fa-star fa-lg"></i>
+                        </div>
+                        <div class="col-9 p-0">Subscribtion</div>
+                    </div>
+                </a>
                 <hr>
 
                 <form action="{{ url('/logout') }}" method="POST" class="">

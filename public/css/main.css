@@ -88,6 +88,9 @@ body {
     border-radius: 5px;
 }
 
+.pMenu-item {
+    height: 35px;
+}
 .nav-logout:hover {
     background-color: rgb(94, 150, 179);
     border-radius: 5px;
