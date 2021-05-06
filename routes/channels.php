@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,5 +23,5 @@ Broadcast::channel('chat.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('match.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+        return (int) $user->id === (int) $id;
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSubscriptionColumnToProfileInformationTable extends Migration
+class AddIsAdminColumnToUserStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddSubscriptionColumnToProfileInformationTable extends Migration
      */
     public function up()
     {
-        Schema::table('profile_information', function (Blueprint $table) {
-            $table->integer('subscribtion')->default(0)->after('to'); 
+        Schema::table('user_statuses', function (Blueprint $table) {
+            $table->boolean('is_admin')->default(false)->after('tendencies');
         });
     }
 
@@ -25,8 +25,8 @@ class AddSubscriptionColumnToProfileInformationTable extends Migration
      */
     public function down()
     {
-        Schema::table('profile_information', function (Blueprint $table) {
-            $table->dropColumn('subscribtion');
+        Schema::table('user_statuses', function (Blueprint $table) {
+            $table->dropColumn('is_admin');
         });
     }
 }

@@ -135,8 +135,10 @@ class ProfileInformationController extends Controller
         if(!Auth::user()->status->tendencies){
             return redirect('set');
         }
-        if(Auth::user()->matches->where('match_with',$id)->first() == null){
-            return redirect('/profile');
+        if(!Auth::user()->status->is_admin){
+            if(Auth::user()->matches->where('match_with',$id)->first() == null){
+                return redirect('/profile');
+            }
         }
 
         $user = Auth::user()->information;
@@ -144,6 +146,17 @@ class ProfileInformationController extends Controller
         $userView = User::find($id);
 
         return view('profile.view')->with(['user' => $user, 'view' => $userView]);
+    }
+
+    public function adminView($user,$id){
+        if(!Auth::user()->status->is_admin){
+            return redirect('/dashboard');
+        }
+        $user_id = $user;
+        $userView = User::find($id);
+
+
+        return view('admin.userProfile')->with(['view' => $userView, 'user_id' => $user_id]);
     }
 
     /**

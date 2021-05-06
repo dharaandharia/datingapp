@@ -10,6 +10,8 @@ use App\Http\Controllers\AppAjaxController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\SubscribtionController;
+use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 
 
@@ -44,7 +46,7 @@ Route::group(['middleware'=> ['auth']],function (){
 
 
 
-Route::group(['middleware' => ['auth','check.profile']],function(){  
+Route::group(['middleware' => ['auth','is.admin','check.profile']],function(){  
 
     Route::get('dashboard',[DashboardController::class,'index']); 
     Route::post('like',[AppAjaxController::class, 'like']);
@@ -69,3 +71,16 @@ Route::group(['middleware' => ['auth','check.profile']],function(){
 Route::get('privacypolicy', [LegalController::class, 'privacyPolicy']);
 Route::get('termsandconditions', [LegalController::class, 'termsAndConditions']);
 Route::get('useragreement', [LegalController::class, 'userAgreement']);
+
+
+Route::get('/sign-in/github', [SocialiteController::class, 'github']);
+Route::get('/sign-in/github/redirect', [SocialiteController::class, 'githubRedirect']);
+
+
+Route::group(['middleware' => ['auth','not.admin']], function(){
+
+    Route::get('/adminPanel', [AdminController::class, 'index']);
+    Route::get('/userdashboard/{id}', [AdminController::class, 'userDashboard']);
+    Route::get('/profileadminview/{user}/{id}', [ProfileInformationController::class, 'adminView']);
+
+});

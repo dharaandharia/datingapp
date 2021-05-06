@@ -14,7 +14,7 @@ class AddSwipesColumnToProfileInformationTable extends Migration
     public function up()
     {
         Schema::table('profile_information', function (Blueprint $table) {
-            $table->integer('swipes')->default(10);
+            $table->integer('swipes')->default(10)->after('subscribtion');
         });
     }
 

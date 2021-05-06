@@ -1,0 +1,43 @@
+body {
+    background-color: #f2f2f2;
+    position: relative;
+}
+
+nav {
+    box-shadow: 0 1px 6px rgb(57 73 76 / 35%);
+}
+
+.admin-logout {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.admin-logout:hover {
+    color: rgb(0, 142, 214);
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.content {
+    box-shadow: 0 1px 6px rgb(57 73 76 / 35%);
+    overflow: auto;
+}
+
+@media (max-width: 575.98px) {
+    .content {
+        width: 95%;
+    }
+}

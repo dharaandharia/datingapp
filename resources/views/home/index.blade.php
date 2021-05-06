@@ -84,7 +84,7 @@
                                         <p class="m-0 pt-2">Or login with</p>
                                         <div class="col row m-0 p-0 pt-1">
                                             <button class="btn btn-facebook col m-1"><i class="fab fa-facebook-f mr-3"></i>Facebook</button>
-                                            <button class="btn btn-instagram col m-1"><i class="fab fa-instagram mr-3"></i>Instagram</button>
+                                            <a class="btn btn-instagram col m-1" href="{{ url('/sign-in/github') }}"><i class="fab fa-instagram mr-3"></i>Instagram</a>
                                         </div>
                                         <p class="m-0 pt-2">Don't have account? <a href="{{ url('/register') }}">Sign up</a></p>
                                     </div>
