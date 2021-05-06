@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChatsTable extends Migration
+class CreateUserPreferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateChatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chats', function (Blueprint $table) {
+        Schema::create('user_preferences', function (Blueprint $table) {
             $table->id();
-            $table->integer('last_message_by')->nullable();
-            $table->text('last_message');
-            $table->integer('number_of_messages')->default(0);
-            $table->boolean('seen')->default(false);
+            $table->integer('user_id');
+            $table->text('food_pref');
             $table->timestamps();
+            $table->index(['user_id']);
         });
     }
 
@@ -30,6 +29,6 @@ class CreateChatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chats');
+        Schema::dropIfExists('user_preferences');
     }
 }

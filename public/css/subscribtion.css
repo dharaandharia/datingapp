@@ -1,0 +1,48 @@
+/* .content {
+    background-color: rgba(214, 0, 35, 0.01);
+} */
+
+.sub {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sub-header {
+    color: white !important;
+    padding: 3rem 0;
+}
+
+.bg-prem {
+    background-color: rgb(0, 142, 214);
+}
+
+.bg-gold {
+    background-color: #d60023;
+}
+
+.sub-body {
+    background-color: white;
+}
+
+.sub.prem i {
+    color: rgb(0, 142, 214);
+}
+
+.sub.gold i {
+    color: #d60023;
+}
+
+.sub-footer {
+    background-color: white;
+}
+
+body {
+    min-height: 100vh !important;
+    background-color: rgba(214, 0, 35, 0.04);
+}
+
+@media (min-width: 992px) {
+    .sub.prem .sub-body {
+        height: 358px;
+    }
+}

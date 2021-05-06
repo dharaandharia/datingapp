@@ -17,5 +17,6 @@ class UserStatus extends Model
         'information' => 'boolean',
         'profile_picture' => 'boolean',
         'tendencies' => 'boolean',
+        'is_admin' => 'boolean',
     ];
 }

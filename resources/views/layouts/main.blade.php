@@ -19,10 +19,10 @@
             <a href="{{ url('/')}}" class="navbar-brand">
                 <div class="row">
                     <div class="align-self-center ml-3 mr-1">
-                        <img src="images/logo.png" alt="logo" style="height: 31px">
+                        <img src="{{ asset('images/logo.png') }}" alt="logo" style="height: 31px">
                     </div>
                     <div class="align-self-center">
-                        <img src="images/wegatyou.png" alt="brandtext" style="height:16px">
+                        <img src="{{ asset('images/wegatyou.png') }}" alt="brandtext" style="height:16px">
                     </div>                        
                 </div>
             </a>
@@ -39,6 +39,16 @@
                                             <div class="nav-img" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div>
                                         </div>
                                         <h6 class="d-flex justify-items-center m-0 p-0 col-9">{{ $user->first_name}} {{$user->last_name}}</h6>
+                                    </div>
+                                </a>
+                                <a href="{{ url('/subscribtion') }}">
+                                    <div class="row p-0 m-0 d-flex align-items-center pMenu-item">
+                                        <div class="col-3 p-0 text-center">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="col-9 p-0">
+                                            Subscription
+                                        </div>
                                     </div>
                                 </a>
                                 <form action="{{ url('/logout') }}" method="POST" class="">
@@ -60,7 +70,6 @@
                     <i class="p-3 fas fa-lg fa-times align-self-center d-none"></i>
                 </div>
                 <div>
-    
                     <a href="{{ url('/')}}" class="navbar-brand py-3">
                         <div class="row">
                             <div class="align-self-center ml-3 mr-1">
@@ -90,7 +99,15 @@
                             <h6 class="d-flex justify-items-center m-0 p-0 col-9 text-left">{{ $user->first_name}} {{$user->last_name}}</h6>
                     </div>
                 </a>
-
+                <hr>
+                <a href="{{ url('/subscribtion') }}">
+                    <div class="p-0 d-flex align-items-center my-3">
+                        <div class="col-3 p-0 text-center">
+                            <i class="fas fa-star fa-lg"></i>
+                        </div>
+                        <div class="col-9 p-0">Subscribtion</div>
+                    </div>
+                </a>
                 <hr>
 
                 <form action="{{ url('/logout') }}" method="POST" class="">

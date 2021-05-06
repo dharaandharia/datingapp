@@ -1,12 +1,11 @@
 $(document).ready(()=>{
-   console.log(chats);
    let x = 0;
    let current = result[x];
 
    // SWiPING
 
    if(!(current === undefined)){
-      document.querySelector('.img').style.background = 'url(/storage/profile_pictures/'+current.profile_picture+') center / cover no-repeat';
+      document.querySelector('.img').style.background = `url('/storage/profile_pictures/${current.profile_picture}') center / cover no-repeat`;
       document.querySelector('.infos').innerText = current.first_name+' '+current.last_name+', '+getAge(current.b_day);
       document.querySelector('.info').classList.remove('d-none');
       document.querySelector('.btn-wrapper').classList.remove('d-none');
@@ -22,12 +21,12 @@ $(document).ready(()=>{
       document.querySelector('.disable-like').classList.remove('d-none');
       document.querySelector('.disable-dislike').classList.remove('d-none');
       if(!(current === undefined)){
-            $.ajax({
-               type:'POST',
-               url:'/like',
-               data:{_token : csrf_token, user_id : current.user_id},
-               success:function(data) {
-               x++;
+         $.ajax({
+            type:'POST',
+            url:'/like',
+            data:{_token : csrf_token, user_id : current.user_id},
+            success:function(data) {
+               result.splice(x,1);
                current = result[x];
                if(!(current === undefined)){
                   document.querySelector('.img').style.background = 'url(/storage/profile_pictures/'+current.profile_picture+') center / cover no-repeat';
@@ -71,6 +70,29 @@ $(document).ready(()=>{
             }
          });
       }
+   })
+
+   // BACK ACTION
+
+   document.querySelector('#back').addEventListener('click',()=>{
+      document.querySelector('.spinner').classList.add('show');
+      document.querySelector('.disable-like').classList.remove('d-none');
+      document.querySelector('.disable-dislike').classList.remove('d-none');
+      setTimeout(()=>{
+         x--;
+         current = result[x];
+         if(!(current === undefined)){
+            document.querySelector('.img').style.background = 'url(/storage/profile_pictures/'+current.profile_picture+') center / cover no-repeat';
+            document.querySelector('.infos').innerText = current.first_name+' '+current.last_name+', '+getAge(current.b_day);
+            document.querySelector('.spinner').classList.remove('show');
+            document.querySelector('.disable-like').classList.add('d-none');
+            document.querySelector('.disable-dislike').classList.add('d-none');
+         }else{
+            document.querySelector('.spinner').classList.remove('show');
+            document.querySelector('.disable-like').classList.add('d-none');
+            document.querySelector('.disable-dislike').classList.add('d-none');
+         }
+      },500)
    })
 
    // GETTING AGE
@@ -156,7 +178,7 @@ $(document).ready(()=>{
 
          // SM CHAT ICON NUMBER
 
-         if(document.querySelector('.chat-wrapper').classList.contains('d-none')){
+         if(document.querySelector('.chat-wrapper').classList.contains('d-none') && document.querySelector('#chat_'+e.chat_id).classList.contains('d-none')){
             if(document.querySelector('.sm-msg-num').innerText.length == 0){
                document.querySelector('.sm-msg-num').innerText = 1;
             }else{
@@ -449,7 +471,11 @@ $(document).ready(()=>{
 
             let nameTitle = document.createElement('span');
             nameTitle.className = 'ml-4';
-            nameTitle.innerText = e.first_name+' '+e.last_name;
+               let link = document.createElement('a');
+               link.href = `/profile/${e.match_with}`;
+               link.innerText = e.first_name+' '+e.last_name;
+
+               nameTitle.appendChild(link);
 
             nameWrapper.appendChild(nameTitle);
          
