@@ -35,7 +35,7 @@ Route::get('/', function () {
 })->middleware('guest');
 
 
-Route::group(['middleware'=> ['auth']],function (){
+Route::group(['middleware'=> ['auth','is.admin']],function (){
 
     Route::resource('profile',ProfileInformationController::class);
     Route::resource('profilePicture',ProfilePictureController::class);
