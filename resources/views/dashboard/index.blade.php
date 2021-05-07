@@ -81,7 +81,8 @@
                             <i class="fas fa-2x fa-heart pt-1"></i>
                         </div>
                     </div>
-                    @if ($user->subscription !== 0)
+                    {{-- @if ($user->subscription !== 0) --}}
+                    @if (true)
                         <i class="fas fa-undo fa-2x" id="back"></i>
                     @endif
                 </div>
