@@ -1,0 +1,51 @@
+php artisan make:migration create_hobbies_table
+php artisan make:migration create_user_hobbies_table
+php artisan make:model Hobby
+
+
+php artisan make:migration create_free_times_table
+
+php artisan make:model FreeTime
+
+php artisan make:migration create_user_free_times_table
+
+php artisan make:migration create_music_table
+php artisan make:migration create_user_music_table
+
+php artisan make:model Music
+php artisan make:model UserMusic
+
+php artisan make:migration create_holidays_table
+php artisan make:migration create_user_holidays_table
+
+
+php artisan make:migration add_aboutinfo_to_users_table
+
+php artisan make:model Holidays
+php artisan make:model UserHolidays
+
+php artisan make:model Question
+php artisan make:model Option
+php artisan make:model UserAnswer
+php artisan make:model UserFreeTime
+
+php artisan make:migration create_questions_table
+php artisan make:migration create_options_table
+php artisan make:migration create_user_answers_table
+
+
+INSERT INTO `hobbies` (`id`, `hobbie`, `created_at`, `updated_at`) VALUES (NULL, 'Sports', NULL, NULL), (NULL, 'Dancing', NULL, NULL), (NULL, 'Theatre', NULL, NULL), (NULL, 'Photography', NULL, NULL), (NULL, 'Film/Video', NULL, NULL), (NULL, 'Literature', NULL, NULL), (NULL, 'Art', NULL, NULL), (NULL, 'Music', NULL, NULL), (NULL, 'Cooking', NULL, NULL), (NULL, 'Cinema', NULL, NULL), (NULL, 'Architecture', NULL, NULL), (NULL, 'History', NULL, NULL);
+
+INSERT INTO `hobbies` (`id`, `hobbie`, `created_at`, `updated_at`) VALUES (NULL, 'Crafts', NULL, NULL), (NULL, 'Pottery', NULL, NULL), (NULL, 'Carpentry/DIY', NULL, NULL), (NULL, 'Collecting', NULL, NULL), (NULL, 'None', NULL, NULL), (NULL, 'Other', NULL, NULL);
+
+INSERT INTO `holidays` (`id`, `holiday`, `created_at`, `updated_at`) VALUES (NULL, 'Beach holiday', NULL, NULL), (NULL, 'Sport/ activity holiday', NULL, NULL), (NULL, 'Educational tour', NULL, NULL), (NULL, 'Meditation', NULL, NULL), (NULL, 'Cruises', NULL, NULL), (NULL, 'Resorts', NULL, NULL), (NULL, 'Staycation', NULL, NULL), (NULL, 'City trips', NULL, NULL), (NULL, 'Vacations for pure relaxation', NULL, NULL), (NULL, 'In the mountains', NULL, NULL), (NULL, 'Camping', NULL, NULL), (NULL, 'Adventure vacation', NULL, NULL), (NULL, 'Hiking', NULL, NULL), (NULL, 'Spa vacation', NULL, NULL), (NULL, 'Group travel', NULL, NULL);
+
+INSERT INTO `questions` (`id`, `category`, `question`, `created_at`, `updated_at`) VALUES (NULL, 'alcohol', 'Do you drink alcohol?', NULL, NULL), (NULL, 'alcohol', 'Do you smoke?', NULL, NULL);
+INSERT INTO `options` (`id`, `question_id`, `option`, `created_at`, `updated_at`) VALUES (NULL, '1', 'Yes, at mealtimes and socially', NULL, NULL);
+INSERT INTO `options` (`id`, `question_id`, `option`, `created_at`, `updated_at`) VALUES (NULL, '1', 'Socially', NULL, NULL), (NULL, '1', 'Never', NULL, NULL);
+INSERT INTO `options` (`id`, `question_id`, `option`, `created_at`, `updated_at`) VALUES (NULL, '2', 'Yes', NULL, NULL), (NULL, '2', 'Socially', NULL, NULL);
+INSERT INTO `options` (`id`, `question_id`, `option`, `created_at`, `updated_at`) VALUES (NULL, '2', 'No', NULL, NULL);
+INSERT INTO `questions` (`id`, `category`, `question`, `created_at`, `updated_at`) VALUES (NULL, 'hobby', 'Where do you like to spend your free time?', NULL, NULL), (NULL, 'hobby', 'How much do you like to cook?', NULL, NULL);
+INSERT INTO `options` (`id`, `question_id`, `option`, `created_at`, `updated_at`) VALUES (NULL, '3', 'At my home or visiting friends', NULL, NULL), (NULL, '3', 'Doing stuff outdoors', NULL, NULL);
+INSERT INTO `options` (`id`, `question_id`, `option`, `created_at`, `updated_at`) VALUES (NULL, '3', 'Socialising', NULL, NULL), (NULL, '4', 'I\'m always cooking and trying new recipes', NULL, NULL), (NULL, '4', 'I like to cook occasionally', NULL, NULL), (NULL, '4', 'I only cook if i have to', NULL, NULL), (NULL, '4', 'I only cook on special occasions', NULL, NULL), (NULL, '4', 'I\'m not a good cook', NULL, NULL);
+

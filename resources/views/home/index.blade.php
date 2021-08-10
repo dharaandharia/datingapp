@@ -51,6 +51,11 @@
                 <div class="home-inner d-flex justify-content-center">
                     <div class="container d-flex align-items-center justify-content-center pt-4 px-2">
                         <div class="card col-md-6 col-lg-5 col-xl-4 p-0 pb-4">
+							@if(session()->has('success'))
+							<div class="alert alert-success">
+								{{ session()->get('success') }}
+							</div>
+						    @endif
                             <div class="card-body opacity-10 text-center p-0">
                                 <img src="{{ asset('images/logo.png') }}" alt="" class="pt-4">
                                 <h2 class="pt-3 pb-1">Sign in</h2>
@@ -156,9 +161,9 @@
                     </div>
                 </div>
             </div>
-            <div class="about-img">
+            <!--<div class="about-img">
                 <div class="dark-overlay"></div>
-            </div>
+            </div>-->
         </div>
 
         {{--     HOW TO START SECTION     --}}

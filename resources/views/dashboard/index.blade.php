@@ -1,16 +1,33 @@
 @extends('layouts.main')
 
 @section('styles')
+    <link rel="stylesheet" href="{{ asset('css/homepage.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/app_combined.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <!--<style>
+    
+   .navbar { background-color: rgba(214, 0, 35, 0.02) !important; }
+  
+</style>-->
+<style>
+    .navbar { background-color: rgba(0, 142, 214, 0.6)!important; }
+    .content { background-color: #fff; }
+</style>
 @endsection
 
 @section('content')
     <section class="container pt-3 pt-lg-4">
+		@if(isset($_GET['subscribed']) && $_GET['subscribed'] == 1)
+			<div class="alert alert-success">Subscribed Successfully</div>
+		@elseif (isset($_GET['subscribed']) && $_GET['subscribed'] == 0)
+			<div class="alert alert-success">Something went wrong. Please try again</div>
+		@endif
         <div class="row">
+			
             <div class="chat-wrapper d-none d-lg-block col-lg-4 p-2">
                 <div class="chat col">
                     <div class="chat-top p-3 row">
-                        <img src="{{asset('storage/profile_pictures/'.$user->profile_picture)}}" alt="">
+                        <img src="{{asset('storage/app/public/profile_pictures/'.$user->profile_picture)}}" alt="">
                         <div class="d-flex align-items-center">
                             <h2 class="m-0 d-flex align-items-center pl-5"><b>Chats</b></h2>
                         </div>
@@ -154,7 +171,32 @@
                 @endforeach
             </div>
         </div>
-    </section>     
+        
+    </section> 
+    <div class="row" style="margin-top:130px;"><div class="col-md-12">
+    <footer>
+            <div class="container text-center">
+                <div class="row py-5">
+                    <div class="col-md-4 text-center">
+                        <h4 class="pb-2">Follow WeGatYou</h4>
+                        <a href="#"><i class="px-3 fab fa-2x fa-twitter-square"></i></a>
+                        {{-- <a href="#"><i class="px-3 fab fa-2x fa-facebook-square"></i></a> --}}
+                        <a href="#"><i class="px-3 fab fa-2x fa-instagram-square"></i></a>
+                    </div>
+                    <div class="col-md-4 legal pt-4 pt-md-0">
+                        <a class="d-block" href="{{ url('/privacypolicy') }}">Privacy Policy</a>
+                        <a class="d-block my-2" href="{{ url('/termsandconditions') }}">Terms and Conditions</a>
+                        <a  class="d-block" href="{{ url('/useragreement') }}">User Agreement</a>
+                    </div>
+                    <div class="col-md-4 text-center pt-5 pt-md-2">
+                        <div>
+                            <img src="images/wegatyou.png"alt="">
+                        </div>
+                        <span>copyright &copy; 2021</span>
+                    </div>
+                </div>
+            </div>
+        </footer></div></div>
 @endsection    
 
 @section('scripts')

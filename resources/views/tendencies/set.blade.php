@@ -82,9 +82,9 @@
                                 <div class="row justify-content-between mt-4">
                                     <h4 class="age">Age:</h4>
                                     <label class="ml-3" for="from">from:</label>
-                                    <input type="number" name="from" id="from" class="col input-field text-center" value="{{ old('from') }}">
+                                    <input type="number" name="from" id="from" class="col input-field text-center" value="{{ old('from') }}" min="16">
                                     <label class="ml-3" for="to">to:</label>
-                                    <input type="number" name="to" id="to" class="col input-field mx-4 text-center" value="{{ old('to') }}">
+                                    <input type="number" name="to" id="to" class="col input-field mx-4 text-center" value="{{ old('to') }}" min="16">
                                 </div>
 
                                 @if ($errors->has('from'))

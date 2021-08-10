@@ -361,10 +361,12 @@ input[type="file"] {
 }
 
 footer {
-    background-color: #d8d5d8;
+    /* background-color: #d8d5d8; */
+    background-color: rgba(0, 142, 214, 0.6);
     color: black;
     border-radius: 5px 5px 0 0;
-    border-top: 2px solid #d60023;
+   /* border-top: 2px solid #d60023; */
+    border-top: 2px solid rgba(0, 142, 214, 0.6);
 }
 
 footer i {

@@ -28,7 +28,9 @@
             </a>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item p-li">
-                    <a class="nav-link" href="#pMenu" data-toggle="collapse" aria-expanded="false" aria-controls="pMenu"><div class="nav-img" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div></a>
+                    <a class="nav-link" href="#pMenu" data-toggle="collapse" aria-expanded="false" aria-controls="pMenu">
+						Profile<div class="nav-img" style="background: url('/storage/profile_pictures/{{$user->profile_picture}}') center / cover no-repeat"> </div>
+					</a>
                     <div class="collapse" id="pMenu" >
                         <div class="pMenu-wrapper">
                             <div class="arrow"></div>

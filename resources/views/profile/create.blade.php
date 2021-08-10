@@ -46,7 +46,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="" class="pt-4">
                         <h2 class="pt-3 m-0">About You</h2>
                         <p class="p-0 m-0 px-4 text-success">WELCOME<br>Congrats !! You have been successfully registered.</p>
-                        <P class="p-0 m-0 px-5">Please insert your presonal information to get started now !!</P>
+                        <P class="p-0 m-0 px-5">Please insert your personal information to get started now !!</P>
                         <form action="{{ url('/profile')}} " method="POST" class="d-flex justify-content-left">
                             @csrf
                             <div class="col">

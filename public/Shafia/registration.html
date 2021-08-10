@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=0">
+<title>Register</title>
+<link rel="icon" href="assets/images/favicon.png" type="image/png">
+      <link rel="stylesheet" type="text/css" href="assets/css/login_and_registration_combined.css" />
+</head>
+   <body id="registrationPage" class=" " >
+      <div id="pageWrapper">
+         <header id="header">
+            <a href="//www.eharmony.com" aria-hidden="true" tabindex="-1">
+            <img class="brandLogo" src="assets/images/ps_logo_2016.svg" alt="Dating with eharmony - eharmony.com" aria-hidden="true" />
+            </a>
+         </header>
+         <main id="content">
+            <link rel="prefetch" href="/static_app/eharmony/6.36.1/css/registration_combined.css">
+            <link rel="prefetch" href="/static_app/eharmony/6.36.1/js/registration_combined.js">
+            <div id="wrapperForLoadingAnimation">
+               <section id="formSection">
+                  <article>
+                     <ul class="tabs">
+                        <li class="active">
+                           <span>Registration</span>
+                        </li>
+                        <li>
+                           <a href="login.html"><span>Log in</span></a>
+                        </li>
+                     </ul>
+                     <h2 class="registrationHeadline">Register for free and test our service. </h2>
+                     <form action="https://www.eharmony.com/profile/registration" id="formRegistration" method="post" autocomplete="off" novalidate="novalidate" class="hetero" data-click-from-social-login="false">
+                        <input type="hidden" id="voucherEnabled" name="voucherEnabled" value="false" />
+                        <input type="hidden" id="voucherFreetext" name="voucherFreetext" value="" />
+                        <input type="hidden" id="regFormTerms" name="terms" value="on">
+                        <div id="mysexEssexRow" class="row ">
+                           <div id="mysexRow" class="column" role="listbox">
+                              <span class="rowLabel">I am</span>
+                              <label class="radioWrap " role="listitem">
+                                 <div class="radioWrapContent" aria-label=" I am Woman
+                                    ">
+                                    <input type="radio" name="mysex" id="mysexW" value="1" tabindex="0">
+                                    <img src="assets/images/female.svg" alt="" />
+                                 </div>
+                              </label>
+                              <label class="radioWrap " role="listitem">
+                                 <div class="radioWrapContent" aria-label=" I am Man
+                                    ">
+                                    <input type="radio" name="mysex" id="mysexM" value="0" tabindex="0">
+                                    <img src="assets/images/male.svg" alt="" />
+                                 </div>
+                              </label>
+                           </div>
+                           <div id="essexRow" class="column" role="listbox">
+                              <span class="rowLabel">Looking for</span>
+                              <label class="radioWrap " role="listitem">
+                                 <div class="radioWrapContent" aria-label=" Looking for Woman
+                                    ">
+                                    <input type="radio" name="essex" id="essexW" value="1" tabindex="0">
+                                    <img src="assets/images/female.svg" alt="" />
+                                 </div>
+                              </label>
+                              <label class="radioWrap " role="listitem">
+                                 <div class="radioWrapContent" aria-label=" Looking for Man
+                                    ">
+                                    <input type="radio" name="essex" id="essexM" value="0" tabindex="0">
+                                    <img src="assets/images/male.svg" alt="" />
+                                 </div>
+                              </label>
+                           </div>
+                           <div id="regsexError" class="wdk-styledHintBox t-error " aria-live="assertive" role="alert" aria-hidden="true" inert="true">
+                              <svg class="wdk-icon icon_warning " role="presentation">
+                                 <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_warning.svg?version=6.36.1/#icon_warning"></use>
+                              </svg>
+                              <div class="textWrapper">
+                                 Please specify which <strong>gender</strong>. 
+                              </div>
+                           </div>
+                        </div>
+                        <div id="emailRow" class="row formElementWrapper">
+                           <div class="wdk-form-text has-hiddenLabel ">
+                              <div class="designWrapper">
+                                 <label for="regFormEmail"><span class="textWrapper">Email address</span></label>
+                                 <span class="inputWrapper t-icon">
+                                    <svg class="wdk-icon icon_envelope " role="presentation">
+                                       <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_envelope.svg?version=6.36.1/#icon_envelope"></use>
+                                    </svg>
+                                    <input id="regFormEmail" type="email" name="email" autocomplete="email" inputmode="email" placeholder="Email address" value="" aria-required="true">
+                                 </span>
+                              </div>
+                              <div id="regEmailError" class="wdk-styledHintBox t-errorForm " aria-live="assertive" role="alert" aria-hidden="true" inert="true">
+                                 <div class="textWrapper">
+                                    Please enter a valid e-mail address and note that you can only have one account per e-mail address. 
+                                 </div>
+                              </div>
+                              <div id="emailNoticeBox" style="display: none;" role="alert">
+                                 <p>
+                                    <svg class="wdk-icon icon_eye_closed " role="presentation">
+                                       <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_eye_closed.svg?version=6.36.1/#icon_eye_closed"></use>
+                                    </svg>
+                                    Your data is not visible and will be secured. 
+                                 </p>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="passwordRow" class="row formElementWrapper">
+                           <div class="wdk-form-text has-hiddenLabel ">
+                              <div class="designWrapper">
+                                 <label for="regFormPassword"><span class="textWrapper">Password</span></label>
+                                 <span class="inputWrapper t-icon">
+                                    <svg class="wdk-icon icon_lock " role="presentation">
+                                       <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_lock.svg?version=6.36.1/#icon_lock"></use>
+                                    </svg>
+                                    <input type="password" id="regFormPassword" name="password" autocomplete="new-password" inputmode="verbatim" value="" class="checkPassword" placeholder="Password">
+                                 </span>
+                              </div>
+                              <div id="regPasswordEmptyError" class="wdk-styledHintBox t-errorForm " aria-live="assertive" role="alert" aria-hidden="true" inert="true">
+                                 <div class="textWrapper">
+                                    Please determine your personal password. 
+                                 </div>
+                              </div>
+                              <div id="regPasswordNotValidError" class="wdk-styledHintBox t-errorForm " aria-live="assertive" role="alert" aria-hidden="true" inert="true">
+                                 <div class="textWrapper">
+                                    Your password does not comply with the guidelines. 
+                                 </div>
+                              </div>
+                              <div id="wdk-passwordRestrictionBox" class="t-profileReg" style="display:none;" data-show-always="false" role="alert">
+                                 <p>For your security, use the following password format:</p>
+                                 <span class="visuallyHidden">
+                                    <p>At least 8 characters.</p>
+                                    <p>Letters AND numbers/special characters.</p>
+                                    <p>Must not be the same as your email address.</p>
+                                 </span>
+                                 <ul aria-hidden="false">
+                                    <li id="minCharacters" class="error">
+                                       <svg class="wdk-icon icon_x " role="presentation">
+                                          <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_x.svg?version=6.36.1/#icon_x"></use>
+                                       </svg>
+                                       <svg class="wdk-icon icon_check " role="presentation">
+                                          <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_check.svg?version=6.36.1/#icon_check"></use>
+                                       </svg>
+                                       <span>At least 8 characters</span>
+                                    </li>
+                                    <li id="lettersAndNumbers" class="error">
+                                       <svg class="wdk-icon icon_x " role="presentation">
+                                          <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_x.svg?version=6.36.1/#icon_x"></use>
+                                       </svg>
+                                       <svg class="wdk-icon icon_check " role="presentation">
+                                          <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_check.svg?version=6.36.1/#icon_check"></use>
+                                       </svg>
+                                       <span>Letters AND numbers/special characters</span>
+                                    </li>
+                                    <li id="partOfEmail" class="error">
+                                       <svg class="wdk-icon icon_x " role="presentation">
+                                          <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_x.svg?version=6.36.1/#icon_x"></use>
+                                       </svg>
+                                       <svg class="wdk-icon icon_check " role="presentation">
+                                          <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_check.svg?version=6.36.1/#icon_check"></use>
+                                       </svg>
+                                       <span>Must not be the same as your email address</span>
+                                    </li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="orientationPermission" class="row formElementWrapper is-hidden">
+                           <input type="hidden" name="consentToStoreSexualOrientation" value="false">
+                           <label></label>
+                           <div id="orientationPermissionError" class="wdk-styledHintBox t-error " aria-live="assertive" role="alert" aria-hidden="true" inert="true">
+                              <svg class="wdk-icon icon_warning " role="presentation">
+                                 <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_warning.svg?version=6.36.1/#icon_warning"></use>
+                              </svg>
+                              <div class="textWrapper">
+                                 Please tick the box 
+                              </div>
+                           </div>
+                        </div>
+                        <div id="legalText">
+                           <p>By clicking below to register, you confirm that you agree to our <a href="/termsandconditions" target="_blank" title="see T&C">Terms & Conditions</a> and you have read and understood our <a href='/privacypolicy/' target='_blank'>Privacy Policy</a>.</p>
+                        </div>
+   <div class="row formElementWrapper">
+										<button id="regFormSubmit" class="wdk-button t-primaryPremium t-knightRider " type="submit"> <span class="text"> <span class="registerWithMail">Register now for free</span> <span class="okAndRegisterWithMail">Einverstanden und mit E-Mail anmelden</span> </span> </button>
+										<div id="facebookRegContainer" class=" is-visible">
+
+
+										<span class="okAndRegisterWithFacebookButtonText">Agree and register using Facebook</span>
+										<div class="wdk-styledHintBox t-error regFacebookGenericError" aria-live="assertive" role="alert" aria-hidden="true" inert="true">
+										<svg class="wdk-icon icon_warning " role="presentation">
+										<use xlink:href="/static_app/eharmony/img/icons/single_color/icon_warning.svg?version=6.36.1/#icon_warning"></use>
+										</svg>
+										<div class="textWrapper">
+										Unfortunately, an error occurred. Please try again later or sign up with your email address and password. </div>
+										</div>
+										<div class="socialSignOnSeparator"><span class="speratorText">or</span></div><button type="button" id="facebookRegButton" class="has-loadingIndicator" aria-label="Facebook login"><span class="text">Sign up with Facebook</span><span class="loader trippleDot"></span><a href="#" class="facebookInfo" role="button" aria-label="Info"><span>i</span></a></button><input type="hidden" name="socialProvider" value=""><input type="hidden" name="socialAccessToken" value=""><input type="hidden" name="socialEmailAddress" value=""></div>
+										</div>
+                     </form>
+                     <div id="facebookNoEMailAdress" class="wdk-modalbox has-smallContent" role="dialog" aria-modal="true" aria-hidden="true" inert="true"
+                        >
+                        <div class="modalboxContent">
+                           <header>
+                              <h3>Unfortunately, your registration with Facebook was not successful.</h3>
+                           </header>
+                           <article class="js-scrollableContent">
+                              <p>For your registration with Facebook an email address is necessary. Please retry and give us release for your email address. If you do not have an email address attached to your Facebook profile yet, please add one to your account and try again.</p>
+                           </article>
+                           <footer>
+                              <button id="askForMissingRights" class="wdk-button t-primarySkin1 js-closeModalbox " type="button" > <span class="text">Retry</span> </button> 
+                           </footer>
+                        </div>
+                     </div>
+                  </article>
+               </section>
+            </div>
+            <p id="loadingText" class=" " >
+               <i class="bg-icon_heart"></i><br />
+               Login... 
+            </p>
+         </main>
+         <footer id="footerUnified" class="loginAndRegistrationLayout">
+            <nav>
+               <ul>
+                  <li>
+                     <a id="footerLink1" href="//www.eharmony.com/aboutus/" >About us</a>
+                  </li>
+                  <li>
+                     <a id="footerLink2" href="//www.eharmony.com/termsandconditions/" >Terms & conditions </a>
+                  </li>
+                  <li>
+                     <a id="footerLink3" href="//www.eharmony.com/privacypolicy" rel="nofollow" >Privacy policy </a>
+                  </li>
+                  <li>
+                     <a id="footerLink4" href="https://www.eharmony.com/customerservice?param=/app/home/" >Help</a>
+                  </li>
+               </ul>
+            </nav>
+         </footer>
+      </div>
+      <div id="techErrorMessages" style="display: none;">
+         <noscript>
+            <div id="JSError" class="topInfoBar">
+               <div class="textWrapper">
+                  <p class="withWarning">
+                     <svg class="wdk-icon icon_warning " role="presentation">
+                        <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_warning.svg?version=6.36.1/#icon_warning"></use>
+                     </svg>
+                     Warning: You have java-script not activated. Please <a href="#">activate JavaScript</a> in order to make use of all eharmony’s features. 
+                  </p>
+               </div>
+            </div>
+         </noscript>
+         <div id="cookieError" class="topInfoBar" style="display:none;">
+            <div class="textWrapper">
+               <p class="withWarning">
+                  <svg class="wdk-icon icon_warning " role="presentation">
+                     <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_warning.svg?version=6.36.1/#icon_warning"></use>
+                  </svg>
+                  To be able to use eharmony, please allow your internet browser to accept cookies. 
+               </p>
+            </div>
+         </div>
+         <div id="legacyBrowser" class="topInfoBar" style="display:none;">
+            <div class="textWrapper">
+               <p class="withWarning">
+                  <svg class="wdk-icon icon_warning " role="presentation">
+                     <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_warning.svg?version=6.36.1/#icon_warning"></use>
+                  </svg>
+                  <strong>You are using an outdated browser.</strong><br />
+                  In order to be able to make full use of eharmony and for security reasons, eharmony recommends that you download an updated version. 
+               </p>
+            </div>
+            <ul class="browserButtons">
+               <li><a href="https://www.google.com/chrome" class="buttonStyle chrome" target="_blank"><span class="browsericon"></span><span>Google<br />Chrome</span></a></li>
+               <li><a href="https://www.mozilla.org/firefox/new" class="buttonStyle firefox" target="_blank"><span class="browsericon"></span><span>Mozilla<br />Firefox</span></a></li>
+               <li><a href="http://windows.microsoft.com/en-GB/internet-explorer/downloads/ie" class="buttonStyle ie" target="_blank"><span class="browsericon"></span><span>Microsoft<br />Edge</span></a></li>
+            </ul>
+            <a class="wdk-button t-plainSkin4 hideInfoBar " href=# >
+               <span class="icon">
+                  <svg class="wdk-icon icon_x " role="presentation">
+                     <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_x.svg?version=6.36.1/#icon_x"></use>
+                  </svg>
+               </span>
+               <span class="text"></span> 
+            </a>
+         </div>
+         <div id="timeoutNotification" class="wdk-toast t-small" aria-hidden="true">
+            Please try again later. 
+         </div>
+         <div id="errorModalbox500" class="wdk-modalbox has-smallContent" data-close-on-bg-click="true" data-close-on-esc="true" role="dialog" aria-modal="true" aria-hidden="true" inert="true"
+            >
+            <div class="modalboxContent">
+               <a class="wdk-button t-plainSkin4 closeX js-closeModalbox " href=# aria-label='Close' >
+                  <span class="icon">
+                     <svg class="wdk-icon icon_x " role="presentation">
+                        <use xlink:href="/static_app/eharmony/img/icons/single_color/icon_x.svg?version=6.36.1/#icon_x"></use>
+                     </svg>
+                  </span>
+                  <span class="text"></span> 
+               </a>
+               <header>
+                  <h3>Your information needs to be corrected or completed.</h3>
+               </header>
+               <article class="js-scrollableContent">
+                  <p>An error has occurred</p>
+               </article>
+               <footer>
+                  <a class="wdk-button t-primarySkin1 js-closeModalbox " href=# > <span class="text">Close window</span> </a> 
+               </footer>
+            </div>
+         </div>
+         <div id="errorModalboxSessionExpired" class="wdk-modalbox has-smallContent" data-close-on-bg-click="true" data-close-on-esc="false" role="dialog" aria-modal="true" aria-hidden="true" inert="true"
+            >
+            <div class="modalboxContent">
+               <header>
+                  <h3>Your session has expired</h3>
+               </header>
+               <article>
+                  <i class="bg-icon_circle_arrows spinRight"></i>
+               </article>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -32,7 +32,7 @@
                     <div class="card-body opacity-10 text-center p-0">
                         <img src="{{ asset('images/logo.png') }}" alt="" class="pt-4">
                         <h2 class="pt-3 pb-1">Register</h2>
-                        <form action="{{ url('/register')}} " method="POST" class="d-flex justify-content-left">
+                        <form action="{{ url('/register-step1')}} " method="POST" class="d-flex justify-content-left">
                             @csrf
                             <div class="col">
 
