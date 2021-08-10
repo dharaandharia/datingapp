@@ -11,10 +11,22 @@ use App\Models\Female;
 use App\Models\Non;
 use App\Models\ProfileInformation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Events\Verified;
 
 class DashboardController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        //$verified = $request->get('verified') ? $request->get('verified') : '' ;
+       // if($verified){
+           // $user = Auth::user();
+           // if ($user->markEmailAsVerified()) {
+               // event(new Verified($user));
+           // }
+            
+          //  if($user->save()){
+               
+          //  }
+      //  }
         $user = Auth::user()->information;
 
         if( $user->iam == 1 ){

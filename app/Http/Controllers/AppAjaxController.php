@@ -10,6 +10,11 @@ use App\Models\Chat;
 use App\Models\UserPreferences;
 use App\Models\UserFavoriteFoods;
 use App\Models\UserFavoriteDrinks;
+use App\Models\UserHoliday;
+use App\Models\UserMusic;
+use App\Models\UserHobbie;
+use App\Models\User;
+use App\Models\ProfileInformation;
 
 use App\Models\Matching;
 use App\Events\NewMatch;
@@ -103,5 +108,147 @@ class AppAjaxController extends Controller
 
     public function deleteFavoriteDrink(Request $request){
         Auth::user()->favoriteDrinks->find($request->id)->delete();
+    }
+    
+    public function setuserholidays(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			
+			foreach($data['holidays'] as $holiday_id){
+				$UserHoliday = new UserHoliday;
+				$UserHoliday->user_id = Auth::user()->id;
+				$UserHoliday->holiday_id = $holiday_id;
+				if($UserHoliday->save()){
+				}
+			}
+			return true;
+		}
+	}
+
+    public function deleteUserHolidays(Request $request){
+        UserHoliday::where('id',$request->id)->delete();
+    }
+    
+    
+    public function setusermusic(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			
+			foreach($data['music'] as $music_id){
+				$UserMusic = new UserMusic;
+				$UserMusic->user_id = Auth::user()->id;
+				$UserMusic->music_id = $music_id;
+				if($UserMusic->save()){
+				}
+			}
+			return true;
+		}
+	}
+	
+	public function setuserhobbie(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			
+			foreach($data['hobbie'] as $hobbie_id){
+				$UserHobbie = new UserHobbie;
+				$UserHobbie->user_id = Auth::user()->id;
+				$UserHobbie->hobbie_id = $hobbie_id;
+				if($UserHobbie->save()){
+				}
+			}
+			return true;
+		}
+	}
+	
+	public function setaboutinfo(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			//~ print_r($data);die;
+			$user = User::where('id',Auth::user()->id)->first();
+			if(!empty($user)){
+				$user->aboutinfo = $data['about'];
+				if($user->save()){
+					return true;
+				}
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	
+	public function setCityState(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			$user = ProfileInformation::where('user_id',Auth::user()->id)->first();
+			if(!empty($user)){
+				$user->country = $data['country'];
+				$user->city = $data['city'];
+				if($user->save()){
+					echo '1';
+					die();
+				}
+				else{
+					echo '0';
+					die();
+				}
+			}
+		}
+		else{
+			echo '0';
+			die();
+		}
+	}
+	
+	public function setGender(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			$user = ProfileInformation::where('user_id',Auth::user()->id)->first();
+			if(!empty($user)){
+				$user->sex = $data['gender'];
+				if($user->save()){
+					echo '1';
+					die();
+				}
+				else{
+					echo '0';
+					die();
+				}
+			}
+		}
+		else{
+			echo '0';
+			die();
+		}
+	}
+	
+	public function setBirthday(Request $request){
+		if(!empty($request->all())){
+			$data = $request->all();
+			$user = ProfileInformation::where('user_id',Auth::user()->id)->first();
+			if(!empty($user)){
+				$user->b_day = $data['bday'];
+				if($user->save()){
+					echo '1';
+					die();
+				}
+				else{
+					echo '0';
+					die();
+				}
+			}
+		}
+		else{
+			echo '0';
+			die();
+		}
+	}
+
+    public function deleteUserMusic(Request $request){
+        UserMusic::where('id',$request->id)->delete();
+    }
+    
+    public function deleteUserHobbie(Request $request){
+        UserHobbie::where('id',$request->id)->delete();
     }
 }

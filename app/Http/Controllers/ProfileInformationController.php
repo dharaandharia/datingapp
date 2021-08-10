@@ -10,6 +10,13 @@ use App\Models\ProfileInformation;
 use App\Models\Preference;
 use App\Models\FavoriteFood;
 use App\Models\FavoriteDrink;
+use App\Models\UserHobbie;
+use App\Models\UserMusic;
+use App\Models\Music;
+use App\Models\UserPreferences;
+use App\Models\UserHoliday;
+use App\Models\Holiday;
+use App\Models\Hobby;
 
 class ProfileInformationController extends Controller
 {
@@ -57,9 +64,79 @@ class ProfileInformationController extends Controller
             return $one->favorite_drink;
         })->values();
         $userFavoriteDrinks = Auth::user()->favoriteDrinks;
-
-        return view('profile.index')->with(['user' => $user,'food_pref' => $food_pref,'pref' => $pref,'favoriteFood' => $favoriteFood, 'userFavoriteFoods' => $userFavoriteFoods,'favoriteDrink' => $favoriteDrink, 'userFavoriteDrinks' => $userFavoriteDrinks]);
+        
+        $userHobbies = UserHobbie::where(['user_id'=>Auth::user()->id])->with('hobbie')->get();
+        
+        $hobbiesArr = array();
+        foreach($userHobbies as $hobbies){
+			$hobbiesArr[$hobbies['hobbie']['id']] = $hobbies['hobbie']['hobbie'];
+		}
+		
+		$userMusic = UserMusic::where(['user_id'=>Auth::user()->id])->with('music')->get();
+        
+        $musicArr = array();
+        foreach($userMusic as $music){
+			$musicArr[$music['music']['id']] = $music['music']['music'];
+		}
+		
+		$userHoliday = UserHoliday::where(['user_id'=>Auth::user()->id])->with('holiday')->get();
+		
+		$holidayArr = array();
+        foreach($userHoliday as $holiday_key => $holiday){
+			$holidayArr[$holiday['holiday']['id']] = $holiday['holiday']['holiday'];
+		}
+		
+		$holidaysTableData = Holiday::select('id','holiday')->get()->all();
+		$musicTableData = Music::select('id','music')->get()->all();
+		$hobbieTableData = Hobby::select('id','hobbie')->get()->all();
+		//~ print_r($holidaysTableData);die;
+		$profileInfo = ProfileInformation::where('user_id',Auth::user()->id)->first();
+		//~ print_r($profileInfo);die;
+		$userabout = User::where('id',Auth::user()->id)->select('aboutinfo')->first();
+        return view('profile.index')->with(['user' => $user,'food_pref' => $food_pref,'pref' => $pref,'favoriteFood' => $favoriteFood, 'userFavoriteFoods' => $userFavoriteFoods,'favoriteDrink' => $favoriteDrink, 'userFavoriteDrinks' => $userFavoriteDrinks,'hobbiesArr'=>$hobbiesArr,'musicArr'=>$musicArr,'userHoliday'=>$userHoliday,'holidayArr'=>$holidayArr,'profileInfo'=>$profileInfo,'holidaysTableData'=>$holidaysTableData,'musicTableData'=>$musicTableData,'hobbieTableData'=>$hobbieTableData,'userabout'=>$userabout]);
     }
+    
+    public function profile2(){
+		if(!Auth::user()->status->information){
+            return redirect('/profile/create');
+        }
+        if(!Auth::user()->status->profile_picture){
+            return redirect('profilePicture/create');
+        }
+        if(!Auth::user()->status->tendencies){
+            return redirect('set');
+        }
+
+        $user = Auth::user()->information;
+        $food_pref = Preference::all()->reject(function($one){
+            if(!Auth::user()->preferences->where('food_pref',$one->food_pref)->first() == null){
+                return $one;
+            }
+        })->map(function($one){
+            return $one->food_pref;
+        })->values();
+        $pref = Auth::user()->preferences;
+
+        $favoriteFood = FavoriteFood::all()->reject(function($one){
+            if(!Auth::user()->favoriteFoods->where('favorite_food',$one->favorite_food)->first() == null){
+                return $one;
+            }
+        })->map(function($one){
+            return $one->favorite_food;
+        })->values();
+        $userFavoriteFoods = Auth::user()->favoriteFoods;
+
+        $favoriteDrink = FavoriteDrink::all()->reject(function($one){
+            if(!Auth::user()->favoriteDrinks->where('favorite_drink',$one->favorite_drink)->first() == null){
+                return $one;
+            }
+        })->map(function($one){
+            return $one->favorite_drink;
+        })->values();
+        $userFavoriteDrinks = Auth::user()->favoriteDrinks;
+
+        return view('profile.index2')->with(['user' => $user,'food_pref' => $food_pref,'pref' => $pref,'favoriteFood' => $favoriteFood, 'userFavoriteFoods' => $userFavoriteFoods,'favoriteDrink' => $favoriteDrink, 'userFavoriteDrinks' => $userFavoriteDrinks]);
+	}
 
     /**
      * Show the form for creating a new resource.

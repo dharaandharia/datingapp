@@ -10,10 +10,12 @@ use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Contracts\Auth\StatefulGuard;
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
+    protected $guard;
 
     /**
      * Validate and create a newly registered user.
@@ -21,6 +23,12 @@ class CreateNewUser implements CreatesNewUsers
      * @param  array  $input
      * @return \App\Models\User
      */
+     
+    public function __construct(StatefulGuard $guard)
+    {
+        $this->guard = $guard;
+    }
+    
     public function create(array $input)
     {
         Validator::make($input, [
@@ -40,7 +48,8 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
-
+        
+        
         UserStatus::create([
             'user_id' => $USER->id
         ]);
@@ -62,7 +71,6 @@ class CreateNewUser implements CreatesNewUsers
             $table->integer('user_id')->unqiue();
             $table->index(['user_id']);
         });
-
-        return $USER;
+       
     }
 }
